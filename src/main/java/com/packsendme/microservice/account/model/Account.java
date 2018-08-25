@@ -1,35 +1,35 @@
 package com.packsendme.microservice.account.model;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.packsendme.microservice.dto.AccessUserDto;
-import com.packsendme.microservice.dto.PaymentDto;
-import com.packsendme.microservice.dto.PaymentHistoryDto;
-import com.packsendme.microservice.dto.SubmissionsHistoryDto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Document(collection = "Account")
-public class Account {
+public class Account implements Serializable {
 	
-	private @Id String id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	@Id
+	private String id;
+	private String userName;
+	@JsonIgnoreProperties
+	private String password;
+	private String email;
 	private String name;
 	private String lastName;
-	private String addressHome;
-	private String addressJob;
-	private String phone;
-	
-	private AccessUserDto accessUser;
-	private SubmissionsHistoryDto submission;
-	private PaymentDto payment;
-	private PaymentHistoryDto paymentHistory;
+	private List<Address> address;
+	private List<Payment> payment;
 	
 	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -42,63 +42,44 @@ public class Account {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAddressHome() {
-		return addressHome;
-	}
-	public void setAddressHome(String addressHome) {
-		this.addressHome = addressHome;
-	}
-	public String getAddressJob() {
-		return addressJob;
-	}
-	public void setAddressJob(String addressJob) {
-		this.addressJob = addressJob;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public SubmissionsHistoryDto getSubmission() {
-		return submission;
-	}
-	public void setSubmission(SubmissionsHistoryDto submission) {
-		this.submission = submission;
-	}
-	public PaymentDto getPayment() {
+
+	public List<Payment> getPayment() {
 		return payment;
 	}
-	public void setPayment(PaymentDto payment) {
+	public void setPayment(List<Payment> payment) {
 		this.payment = payment;
 	}
-	public PaymentHistoryDto getPaymentHistory() {
-		return paymentHistory;
+	public String getUserName() {
+		return userName;
 	}
-	public void setPaymentHistory(PaymentHistoryDto paymentHistory) {
-		this.paymentHistory = paymentHistory;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public AccessUserDto getAccessUser() {
-		return accessUser;
+	public String getEmail() {
+		return email;
 	}
-	public void setAccessUser(AccessUserDto accessUser) {
-		this.accessUser = accessUser;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public List<Address> getAddress() {
+		return address;
+	}
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	public Account(String id, String name, String lastName, String addressHome, String addressJob, String email,
-			String phone, SubmissionsHistoryDto submission, PaymentDto payment, PaymentHistoryDto paymentHistory,
-			AccessUserDto accessUser) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.lastName = lastName;
-		this.addressHome = addressHome;
-		this.addressJob = addressJob;
-		this.phone = phone;
-		this.submission = submission;
-		this.payment = payment;
-		this.paymentHistory = paymentHistory;
-		this.accessUser = accessUser;
-	}
+
 	
 }

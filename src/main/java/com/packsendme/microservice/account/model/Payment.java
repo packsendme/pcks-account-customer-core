@@ -1,38 +1,27 @@
-package com.packsendme.microservice.dto;
+package com.packsendme.microservice.account.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 
-public class PaymentDto {
+public class Payment implements Serializable {
 	
-	private @Id String id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	private String id;
 	private String cardholderName;
-	
 	private String cardType;
-	
 	private int bin;
-	
-	private Date expirationDate;
-	
 	private int expirationMonth;
-	
 	private int expirationYear;
-	
 	private String billingAddress;
-	
 	private int securityNumber;
-	
 	private String status;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getCardholderName() {
 		return cardholderName;
@@ -56,14 +45,6 @@ public class PaymentDto {
 
 	public void setBin(int bin) {
 		this.bin = bin;
-	}
-
-	public Date getExpirationDate() {
-		return expirationDate;
-	}
-
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
 	}
 
 	public int getExpirationMonth() {
@@ -106,20 +87,11 @@ public class PaymentDto {
 		this.status = status;
 	}
 
-	public PaymentDto(String id, String cardholderName, String cardType, int bin, Date expirationDate, int expirationMonth,
-			int expirationYear, String billingAddress, int securityNumber, String status) {
-		super();
-		this.id = id;
-		this.cardholderName = cardholderName;
-		this.cardType = cardType;
-		this.bin = bin;
-		this.expirationDate = expirationDate;
-		this.expirationMonth = expirationMonth;
-		this.expirationYear = expirationYear;
-		this.billingAddress = billingAddress;
-		this.securityNumber = securityNumber;
-		this.status = status;
+	public String getId() {
+		return id;
 	}
-	
-	
+
+	public void setId(String id) {
+		this.id = id;
+	}
 }
