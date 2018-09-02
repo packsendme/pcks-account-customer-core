@@ -1,4 +1,4 @@
-package com.packsendme.microservice.account.model;
+package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "Account")
-public class Address implements Serializable {
+public class AddressModel implements Serializable {
 	
 	/**
 	 * 

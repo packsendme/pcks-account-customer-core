@@ -1,4 +1,4 @@
-package com.packsendme.microservice.account.model;
+package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Document(collection = "Account")
-public class Account implements Serializable {
+public class AccountModel implements Serializable {
 	
 	/**
 	 * 
@@ -19,15 +19,15 @@ public class Account implements Serializable {
 	 * 
 	 */
 	@Id
-	private String id;
+    private String id;
 	private String userName;
 	@JsonIgnoreProperties
 	private String password;
 	private String email;
 	private String name;
 	private String lastName;
-	private List<Address> address;
-	private List<Payment> payment;
+	private List<AddressModel> address;
+	private List<PaymentModel> payment;
 	
 	
 	public String getName() {
@@ -43,10 +43,10 @@ public class Account implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public List<Payment> getPayment() {
+	public List<PaymentModel> getPayment() {
 		return payment;
 	}
-	public void setPayment(List<Payment> payment) {
+	public void setPayment(List<PaymentModel> payment) {
 		this.payment = payment;
 	}
 	public String getUserName() {
@@ -61,10 +61,10 @@ public class Account implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Address> getAddress() {
+	public List<AddressModel> getAddress() {
 		return address;
 	}
-	public void setAddress(List<Address> address) {
+	public void setAddress(List<AddressModel> address) {
 		this.address = address;
 	}
 	public String getPassword() {

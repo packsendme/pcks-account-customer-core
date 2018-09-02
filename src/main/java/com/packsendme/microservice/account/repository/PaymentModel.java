@@ -1,11 +1,13 @@
-package com.packsendme.microservice.account.model;
+package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class Payment implements Serializable {
+@Document(collection = "Account")
+public class PaymentModel implements Serializable {
 	
 	/**
 	 * 
