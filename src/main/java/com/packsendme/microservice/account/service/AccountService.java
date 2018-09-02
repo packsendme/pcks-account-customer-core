@@ -10,8 +10,8 @@ import com.mongodb.MongoClientException;
 import com.packsendme.lib.common.constants.HttpExceptionPackSend;
 import com.packsendme.lib.common.response.Response;
 import com.packsendme.microservice.account.controller.IAMClient;
+import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.repository.AccountModel;
-import com.packsendme.microservice.dao.AccountDAO;
 
 @Service
 @ComponentScan("com.packsendme.microservice.dao")
