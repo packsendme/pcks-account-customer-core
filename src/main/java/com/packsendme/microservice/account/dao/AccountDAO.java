@@ -1,4 +1,4 @@
-package com.packsendme.microservice.dao;
+package com.packsendme.microservice.account.dao;
 
 import java.util.List;
 
