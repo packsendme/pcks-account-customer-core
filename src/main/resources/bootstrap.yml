@@ -1,6 +1,7 @@
 spring:
   application:
-     name: packsendme-account-server
+    name: packsendme-account-server
   cloud:
     config:
       uri: http://localhost:9090
+      
