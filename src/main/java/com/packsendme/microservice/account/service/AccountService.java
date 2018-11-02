@@ -30,24 +30,24 @@ public class AccountService {
 			if(accountSave != null) {
 				ResponseEntity<?> userAccessEnable = iamClient.enableUserAccess(account.getUserName(),account.getPassword());
 				if(userAccessEnable.getStatusCode() == HttpStatus.ACCEPTED) {
-					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATED, HttpExceptionPackSend.ACCOUNT_CREATED.toString(), accountSave);
+					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATED.value(), HttpExceptionPackSend.ACCOUNT_CREATED.getAction(), accountSave);
 					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 				}
 				else {
 					cancelAccount(account.getUserName());
-					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATE_FAIL, HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.toString(), null);
+					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.value(), HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.getAction(), null);
 					return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATE_FAIL, HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.toString(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.value(), HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			cancelAccount(account.getUserName());
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION, HttpExceptionPackSend.FAIL_EXECUTION.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -61,13 +61,13 @@ public class AccountService {
 				entity.setUserName(username);
 				entity = accountDAO.find(entity);
 				accountDAO.remove(entity);
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_DELETE, HttpExceptionPackSend.ACCOUNT_DELETE.toString(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_DELETE.value(), HttpExceptionPackSend.ACCOUNT_DELETE.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION, HttpExceptionPackSend.FAIL_EXECUTION.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -80,12 +80,12 @@ public class AccountService {
 			entity.setUserName(username);
 			entity = accountDAO.find(entity);
 
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT, HttpExceptionPackSend.FOUND_ACCOUNT.toString(), entity);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.value(), HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
 			return new ResponseEntity<>(responseObj, HttpStatus.OK);
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.NOT_FOUND_ACCOUNT, HttpExceptionPackSend.NOT_FOUND_ACCOUNT.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.NOT_FOUND_ACCOUNT.value(), HttpExceptionPackSend.NOT_FOUND_ACCOUNT.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.OK);
 		}
 	}
@@ -109,12 +109,12 @@ public class AccountService {
 			entity.setPayment(account.getPayment());
 			
 			entity = accountDAO.update(entity);
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT, HttpExceptionPackSend.UPDATE_ACCOUNT.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.value(), HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION, HttpExceptionPackSend.FAIL_EXECUTION.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -129,12 +129,12 @@ public class AccountService {
 			entity = accountDAO.find(entity);
 			entity.setUserName(usernamenew);
 			entity = accountDAO.update(entity);
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.USERNAME_UPDATE, HttpExceptionPackSend.USERNAME_UPDATE.toString(), entity);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.USERNAME_UPDATE.value(), HttpExceptionPackSend.USERNAME_UPDATE.getAction(), entity);
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION, HttpExceptionPackSend.FAIL_EXECUTION.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -145,17 +145,17 @@ public class AccountService {
 			entity.setEmail(email);
 			entity = accountDAO.find(entity);
 			if(entity != null) {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_EMAIL, HttpExceptionPackSend.FOUND_EMAIL.toString(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_EMAIL.value(), HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.NOT_FOUND_EMAIL, HttpExceptionPackSend.NOT_FOUND_EMAIL.toString(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.NOT_FOUND_EMAIL.value(), HttpExceptionPackSend.NOT_FOUND_EMAIL.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION, HttpExceptionPackSend.FAIL_EXECUTION.toString(), null);
+			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
