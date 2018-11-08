@@ -28,13 +28,13 @@ public class AccountService {
 		try {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {
-				ResponseEntity<?> userAccessEnable = iamClient.enableUserAccess(account.getUserName(),account.getPassword());
+				ResponseEntity<?> userAccessEnable = iamClient.enableUserAccess(account.getUsername(),account.getPassword());
 				if(userAccessEnable.getStatusCode() == HttpStatus.ACCEPTED) {
 					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATED.value(), HttpExceptionPackSend.ACCOUNT_CREATED.getAction(), accountSave);
 					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 				}
 				else {
-					cancelAccount(account.getUserName());
+					cancelAccount(account.getUsername());
 					Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.value(), HttpExceptionPackSend.ACCOUNT_CREATE_FAIL.getAction(), null);
 					return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 				}
@@ -46,7 +46,7 @@ public class AccountService {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			cancelAccount(account.getUserName());
+			cancelAccount(account.getUsername());
 			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FAIL_EXECUTION.value(), HttpExceptionPackSend.FAIL_EXECUTION.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -58,7 +58,7 @@ public class AccountService {
 
 			ResponseEntity<?> responseIAMDelete = iamClient.cancelUserAccessRegistration(username);
 			if ( responseIAMDelete.getStatusCode() == HttpStatus.ACCEPTED) {
-				entity.setUserName(username);
+				entity.setUsername(username);
 				entity = accountDAO.find(entity);
 				accountDAO.remove(entity);
 				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.ACCOUNT_DELETE.value(), HttpExceptionPackSend.ACCOUNT_DELETE.getAction(), null);
@@ -77,7 +77,7 @@ public class AccountService {
 	public ResponseEntity<?> getAccount(String username) {
 		AccountModel entity = new AccountModel();
 		try {
-			entity.setUserName(username);
+			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 
 			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.value(), HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
@@ -97,7 +97,7 @@ public class AccountService {
 			
 			System.out.println(" updateAllAccount");
 
-			entity.setUserName(account.getUserName());
+			entity.setUsername(account.getUsername());
 			entity = accountDAO.find(entity);
 			
 			System.out.println(" ENTROU NULL "+ entity.getName() );
@@ -106,8 +106,6 @@ public class AccountService {
 			entity.setName(account.getName());
 			entity.setLastName(account.getLastName());
 			entity.setAddress(account.getAddress());
-			entity.setPayment(account.getPayment());
-			
 			entity = accountDAO.update(entity);
 			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.value(), HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
@@ -125,9 +123,9 @@ public class AccountService {
 		System.out.println(" updateUsernameAccount usernamenew "+ usernamenew);
 
 		try {
-			entity.setUserName(username);
+			entity.setUsername(username);
 			entity = accountDAO.find(entity);
-			entity.setUserName(usernamenew);
+			entity.setUsername(usernamenew);
 			entity = accountDAO.update(entity);
 			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.USERNAME_UPDATE.value(), HttpExceptionPackSend.USERNAME_UPDATE.getAction(), entity);
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);

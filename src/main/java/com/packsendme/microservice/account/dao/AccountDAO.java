@@ -30,8 +30,8 @@ public class AccountDAO implements IAccountMongo {
 	public AccountModel find(AccountModel entity) {
 		AccountModel account = null;
 		try {
-			if(entity.getUserName() != null) {
-				account = accountRepository.findAccountByUserName(entity.getUserName());
+			if(entity.getUsername() != null) {
+				account = accountRepository.findAccountByUserName(entity.getUsername());
 			}
 			else if(entity.getEmail() != null) {
 				account = accountRepository.findAccountByEmail(entity.getEmail());
