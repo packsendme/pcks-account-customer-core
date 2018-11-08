@@ -1,5 +1,7 @@
 package com.packsendme.microservice.account.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -106,6 +108,7 @@ public class AccountService {
 			entity.setName(account.getName());
 			entity.setLastName(account.getLastName());
 			entity.setAddress(account.getAddress());
+			entity.setDateUpdate(account.getDateUpdate());
 			entity = accountDAO.update(entity);
 			Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.value(), HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 			return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
@@ -124,6 +127,7 @@ public class AccountService {
 
 		try {
 			entity.setUsername(username);
+			entity.setDateUpdate(new Date());
 			entity = accountDAO.find(entity);
 			entity.setUsername(usernamenew);
 			entity = accountDAO.update(entity);
