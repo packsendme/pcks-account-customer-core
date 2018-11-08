@@ -1,6 +1,7 @@
 package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -20,14 +21,15 @@ public class AccountModel implements Serializable {
 	 */
 	@Id
     private String id;
-	private String userName;
+	private String username;
 	@JsonIgnoreProperties
 	private String password;
 	private String email;
 	private String name;
 	private String lastName;
+	private Date dateCreation;
+	private Date dateUpdate;
 	private List<AddressModel> address;
-	private List<PaymentModel> payment;
 	
 	
 	public String getName() {
@@ -42,18 +44,11 @@ public class AccountModel implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	public List<PaymentModel> getPayment() {
-		return payment;
+	public String getUsername() {
+		return username;
 	}
-	public void setPayment(List<PaymentModel> payment) {
-		this.payment = payment;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getEmail() {
 		return email;
@@ -78,6 +73,18 @@ public class AccountModel implements Serializable {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+	public Date getDateUpdate() {
+		return dateUpdate;
+	}
+	public void setDateUpdate(Date dateUpdate) {
+		this.dateUpdate = dateUpdate;
 	}
 	
 
