@@ -1,16 +1,13 @@
-package com.packsendme.microservice.account.repository;
+package com.packsendme.microservice.to;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Document(collection = "Account")
-public class AccountModel implements Serializable {
+public class AccountDto implements Serializable {
 	
 	/**
 	 * 
@@ -27,9 +24,8 @@ public class AccountModel implements Serializable {
 	private String email;
 	private String name;
 	private String lastName;
-	private Date dateCreation;
-	private Date dateUpdate;
-	private List<AddressModel> address;
+	private String dtAction;
+	private List<AddressDto> address;
 	
 	
 	public String getName() {
@@ -56,10 +52,10 @@ public class AccountModel implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<AddressModel> getAddress() {
+	public List<AddressDto> getAddress() {
 		return address;
 	}
-	public void setAddress(List<AddressModel> address) {
+	public void setAddress(List<AddressDto> address) {
 		this.address = address;
 	}
 	public String getPassword() {
@@ -74,17 +70,11 @@ public class AccountModel implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getDateCreation() {
-		return dateCreation;
+	public String getDtAction() {
+		return dtAction;
 	}
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setDtAction(String dtAction) {
+		this.dtAction = dtAction;
 	}
-	public Date getDateUpdate() {
-		return dateUpdate;
-	}
-	public void setDateUpdate(Date dateUpdate) {
-		this.dateUpdate = dateUpdate;
-	}
-	
+
 }
