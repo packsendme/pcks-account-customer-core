@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface AccountRepository extends MongoRepository<AccountModel, String>   {
 	
-	@Query("{'userName' :  {$eq: ?0}}")
+	@Query("{'username' :  {$eq: ?0}}")
 	AccountModel findAccountByUserName(String username);
 
 	@Query("{'email' :  {$eq: ?0}}")
