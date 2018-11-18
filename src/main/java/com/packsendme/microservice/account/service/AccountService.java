@@ -43,9 +43,9 @@ public class AccountService {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {
 				// Call IAMService - To allows User Access 
-				ResponseEntity<?> userAccessEnable = iamClient.allowsFirstUserAccess(account.getUsername(),
+				ResponseEntity<?> userAccessEnable = iamClient.createUser(account.getUsername(),
 						account.getPassword(), accountDto.getDtAction());
-				if(userAccessEnable.getStatusCode() == HttpStatus.OK) {
+				if(userAccessEnable.getStatusCode() == HttpStatus.ACCEPTED) {
 					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 				}
 				// Call IAMService - Error update that delete account
