@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @FeignClient(name="packsendme-iam-server")
 public interface IAMClient {
 	
-	@PutMapping("/iam/access/{username}/{password}")
+	@PutMapping("/iam/access/{username}/{password}/{dtAction}")
 	ResponseEntity<?> allowsFirstUserAccess(
 			@PathVariable("username") String username, 
 			@PathVariable("password") String password,
