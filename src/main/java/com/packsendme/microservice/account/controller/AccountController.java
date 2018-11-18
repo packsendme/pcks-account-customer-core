@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.packsendme.microservice.account.dto.AccountDto;
 import com.packsendme.microservice.account.service.AccountService;
-import com.packsendme.microservice.to.AccountDto;
 
 @RestController
 public class AccountController {

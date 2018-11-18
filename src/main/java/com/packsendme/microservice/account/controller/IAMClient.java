@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 public interface IAMClient {
 	
 	@PutMapping("/iam/access/{username}/{password}")
-	ResponseEntity<?> allowsFirstUserAccess(@PathVariable("username") String username, @PathVariable("password") String password);
+	ResponseEntity<?> allowsFirstUserAccess(
+			@PathVariable("username") String username, 
+			@PathVariable("password") String password,
+			@PathVariable("dtAction") String dtAction);
 
 }

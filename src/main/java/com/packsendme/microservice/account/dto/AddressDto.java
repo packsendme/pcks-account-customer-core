@@ -1,4 +1,4 @@
-package com.packsendme.microservice.to;
+package com.packsendme.microservice.account.dto;
 
 import java.io.Serializable;
 import java.util.List;
