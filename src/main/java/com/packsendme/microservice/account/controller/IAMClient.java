@@ -12,6 +12,6 @@ public interface IAMClient {
 	ResponseEntity<?> allowsFirstUserAccess(
 			@PathVariable("username") String username, 
 			@PathVariable("password") String password,
-			@PathVariable ("dtAction") String dtAction);
+			@PathVariable("dtAction") String dtAction);
 
 }
