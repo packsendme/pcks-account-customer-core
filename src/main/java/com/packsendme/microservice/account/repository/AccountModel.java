@@ -30,7 +30,8 @@ public class AccountModel implements Serializable {
 	private Date dateCreation;
 	private Date dateUpdate;
 	private List<AddressModel> address;
-	
+	private List<PaymentModel> payment;
+
 	
 	public String getName() {
 		return name;
@@ -85,6 +86,12 @@ public class AccountModel implements Serializable {
 	}
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
+	}
+	public List<PaymentModel> getPayment() {
+		return payment;
+	}
+	public void setPayment(List<PaymentModel> payment) {
+		this.payment = payment;
 	}
 	
 }
