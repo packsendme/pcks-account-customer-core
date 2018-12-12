@@ -1,4 +1,4 @@
-package com.packsendme.microservice.account.repository;
+ package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +19,7 @@ public class PaymentModel implements Serializable {
 	@Id
     private String id;
     private String cardName;
+    private String cardType;
 	private String cardNumber;
 	private Date cardExpiry;
 	private String cardCVV;
@@ -60,6 +61,12 @@ public class PaymentModel implements Serializable {
 	}
 	public void setCardCountry(String cardCountry) {
 		this.cardCountry = cardCountry;
+	}
+	public String getCardType() {
+		return cardType;
+	}
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
 	}
 
 
