@@ -23,6 +23,7 @@ public class PaymentModel implements Serializable {
 	private String cardNumber;
 	private Date cardExpiry;
 	private String cardCVV;
+	private int cardOrder;
 	private String cardCountry;
 	
 	
@@ -67,6 +68,12 @@ public class PaymentModel implements Serializable {
 	}
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
+	}
+	public int getCardOrder() {
+		return cardOrder;
+	}
+	public void setCardOrder(int cardOrder) {
+		this.cardOrder = cardOrder;
 	}
 
 
