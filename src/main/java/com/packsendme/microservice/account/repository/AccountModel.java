@@ -8,6 +8,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "Account")
 public class AccountModel implements Serializable {
@@ -29,7 +31,13 @@ public class AccountModel implements Serializable {
 	private String lastName;
 	private Date dateCreation;
 	private Date dateUpdate;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonProperty("address")
 	private List<AddressModel> address;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonProperty("payment")
 	private List<PaymentModel> payment;
 
 	

@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "Address")
 public class AccountDto implements Serializable {
@@ -27,6 +29,9 @@ public class AccountDto implements Serializable {
 	private String name;
 	private String lastName;
 	private String dtAction;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@JsonProperty("address")
 	private List<AddressDto> address;
 	
 	
