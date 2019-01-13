@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Payment")
+@Document(collection = "Account")
 public class PaymentModel implements Serializable {
 	
 	/**
