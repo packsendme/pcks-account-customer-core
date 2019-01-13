@@ -37,14 +37,14 @@ public class AccountService {
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATED_ACCOUNT.getAction(), accountSave);
 		AccountModel account = new AccountModel();
 		account = convertToEntity(accountDto);
-		Date dtCreation = convertObj.convertStringToDate(accountDto.getDtAction());
+		Date dtCreation = convertObj.convertStringToDate(accountDto.getDateCreation());
 		account.setDateCreation(dtCreation);
 		try {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {
 				// Call IAMService - To allows User Access 
 				ResponseEntity<?> userAccessEnable = iamClient.createUser(account.getUsername(),
-						account.getPassword(), accountDto.getDtAction());
+						account.getPassword(), accountDto.getDateCreation());
 				if(userAccessEnable.getStatusCode() == HttpStatus.ACCEPTED) {
 					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 				}
@@ -122,9 +122,11 @@ public class AccountService {
 	public ResponseEntity<?> updateAccountByAll(AccountDto accountDto) throws Exception {
 		AccountModel entity = new AccountModel();
 		entity = convertToEntity(accountDto);
-		Date dtUpdate = convertObj.convertStringToDate(accountDto.getDtAction());
+		Date dtCreate = convertObj.convertStringToDate(accountDto.getDateCreation());
+		Date dtUpdate = convertObj.convertStringToDate(accountDto.getDateUpdate());
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 		try {
+			entity.setDateCreation(dtCreate);
 			entity.setDateUpdate(dtUpdate);
 			AccountModel accountFind = accountDAO.find(entity);
 			if(accountFind != null) {

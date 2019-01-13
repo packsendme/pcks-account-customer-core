@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Document(collection = "Address")
+@Document(collection = "AccountDto")
 public class AccountDto implements Serializable {
 	
 	/**
@@ -28,7 +28,11 @@ public class AccountDto implements Serializable {
 	private String email;
 	private String name;
 	private String lastName;
-	private String dtAction;
+
+	private String dateCreation;
+	private String dateUpdate;
+	
+	
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("address")
@@ -77,11 +81,16 @@ public class AccountDto implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDtAction() {
-		return dtAction;
+	public String getDateCreation() {
+		return dateCreation;
 	}
-	public void setDtAction(String dtAction) {
-		this.dtAction = dtAction;
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
 	}
-
+	public String getDateUpdate() {
+		return dateUpdate;
+	}
+	public void setDateUpdate(String dateUpdate) {
+		this.dateUpdate = dateUpdate;
+	}
 }
