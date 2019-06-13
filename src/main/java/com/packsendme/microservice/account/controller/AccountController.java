@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.packsendme.microservice.account.dto.AccountDto;
+import com.packsendme.microservice.account.dto.AddressAccountDto;
 import com.packsendme.microservice.account.service.AccountService;
 
 @RestController
@@ -46,6 +47,11 @@ public class AccountController {
 	@PutMapping("/account")
 	public ResponseEntity<?> changeAccount(@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.updateAccountByAll(account);
+	}
+	
+	@PutMapping("/account/address")
+	public ResponseEntity<?> changeAddressAccount(@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
+		return accountService.updateAddressAccountByUsername(addressAccount);
 	}
 	
 	@GetMapping("/account/{email}")
