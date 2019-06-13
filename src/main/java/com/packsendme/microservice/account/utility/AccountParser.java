@@ -28,7 +28,10 @@ public class AccountParser {
 		for (AddressModel addressEntity : entity.getAddress()) {
 			addressNewModel = new AddressModel();
 			System.out.println(" 1 -  addressNewModel ");
-			if(addressEntity.getType() == addressDto.getType()) {
+			System.out.println(" 1.1 -  addressNewModel DTO "+ addressDto.getType());
+			System.out.println(" 1 .2-  addressNewModel ENT "+ addressEntity.getType());
+			
+			if(addressEntity.getType().equals(addressDto.getType())) {
 				System.out.println(" 2 -  addressNewModel "+ addressEntity.getType());
 				addressNewModel = addressEntity;
 				addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
