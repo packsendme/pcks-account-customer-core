@@ -33,8 +33,11 @@ public class AccountParser {
 			
 			if(addressEntity.getType().equals(addressDto.getType())) {
 				System.out.println(" 2 -  addressNewModel "+ addressEntity.getType());
-				addressNewModel = addressEntity;
+				addressNewModel.setId(addressEntity.getId());
+				addressNewModel.setType(addressEntity.getId());
+				addressNewModel.setAddress(addressEntity.getAddress());
 				addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
+				addressNewModel.setType(addressEntity.getType());
 			}
 			else {
 				System.out.println(" 3 -  addressNewModel "+ addressEntity.getType());
@@ -44,6 +47,7 @@ public class AccountParser {
 		}
 		System.out.println(" 4 -  addressNewModel "+ addressNewEntityL.size());
 		// MEW ADDRESS ::
+		addressNewModel = new AddressModel();
 		addressNewModel.setType("");
 		addressNewModel.setAddress(addressDto.getAddress());
 		addressNewModel.setMain(accountConst.ADDRESS_ORDER_MAIN);
