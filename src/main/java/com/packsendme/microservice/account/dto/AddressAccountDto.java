@@ -24,11 +24,9 @@ public class AddressAccountDto implements Serializable {
     private String id;
 	private String username;
 	private String dateUpdate;
-	
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@JsonProperty("address")
-	private List<AddressDto> address;
-	
+	private String address;
+	private String type;
+	private String main;
 	
 	public String getUsername() {
 		return username;
@@ -36,12 +34,7 @@ public class AddressAccountDto implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public List<AddressDto> getAddress() {
-		return address;
-	}
-	public void setAddress(List<AddressDto> address) {
-		this.address = address;
-	}
+
 	public String getId() {
 		return id;
 	}
@@ -53,5 +46,23 @@ public class AddressAccountDto implements Serializable {
 	}
 	public void setDateUpdate(String dateUpdate) {
 		this.dateUpdate = dateUpdate;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getMain() {
+		return main;
+	}
+	public void setMain(String main) {
+		this.main = main;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }
