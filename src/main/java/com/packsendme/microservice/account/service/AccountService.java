@@ -16,7 +16,9 @@ import com.packsendme.lib.utility.ConvertFormat;
 import com.packsendme.microservice.account.controller.IAMClient;
 import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.dto.AccountDto;
+import com.packsendme.microservice.account.dto.AddressAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
+import com.packsendme.microservice.account.utility.AccountParser;
 
 @Service
 @ComponentScan("com.packsendme.lib.utility")
@@ -30,7 +32,9 @@ public class AccountService {
 
 	@Autowired
 	private ConvertFormat convertObj;
-	//private ConvertFormat convertObj = new ConvertFormat();
+ 
+	@Autowired
+	private AccountParser accountParser;
 	
 	public ResponseEntity<?> registerAccount(AccountDto accountDto) throws Exception {
 		AccountModel accountSave = null;
@@ -143,13 +147,38 @@ public class AccountService {
 		}
 	}
 	
+	public ResponseEntity<?> updateAddressAccountByUsername(AddressAccountDto addressAccount) throws Exception {
+
+
+		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
+		try {
+			AccountModel accountObj = new AccountModel();
+			accountObj.setUsername(addressAccount.getUsername());
+			AccountModel accountFind = accountDAO.find(accountObj);
+			
+			// Parser Account Entity - Account Address
+			AccountModel entity = accountParser.parseAddressDtoToAccountModel(accountFind, addressAccount);
+
+			if(entity != null) {
+				entity = accountDAO.update(entity);
+				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+		}
+		catch (MongoClientException e ) {
+			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	
 	public ResponseEntity<?> findAccountByEmail(String email) {
-		AccountModel entity = new AccountModel();
+		AccountModel accountEntity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
 		try {
-			entity.setEmail(email);
-			entity = accountDAO.find(entity);
+			accountEntity.setEmail(email);
+			AccountModel entity = accountDAO.find(accountEntity);
 			if(entity != null) {
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
