@@ -23,19 +23,31 @@ public class AccountParser {
 	public AccountModel parseAddressDtoToAccountModel(AccountModel entity, AddressAccountDto addressDto) throws Exception {
 		
 		List<AddressModel> addressNewEntityL = new ArrayList<AddressModel>();
-		
+		AddressModel addressNewModel = new AddressModel();
 		
 		for (AddressModel addressEntity : entity.getAddress()) {
-			AddressModel addressNewModel = new AddressModel();
+			addressNewModel = new AddressModel();
+			System.out.println(" 1 -  addressNewModel ");
 			if(addressEntity.getType() == addressDto.getType()) {
+				System.out.println(" 2 -  addressNewModel "+ addressEntity.getType());
 				addressNewModel = addressEntity;
 				addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
 			}
 			else {
+				System.out.println(" 3 -  addressNewModel "+ addressEntity.getType());
 				addressNewModel = addressEntity;	
 			}
 			addressNewEntityL.add(addressNewModel);
 		}
+		System.out.println(" 4 -  addressNewModel "+ addressNewEntityL.size());
+		// MEW ADDRESS ::
+		addressNewModel.setType("");
+		addressNewModel.setAddress(addressDto.getAddress());
+		addressNewModel.setMain(accountConst.ADDRESS_ORDER_MAIN);
+		addressNewModel.setType(addressDto.getType());
+		addressNewEntityL.add(addressNewModel);
+		System.out.println(" 5 -  addressNewModel "+ addressNewEntityL.size());
+		
 		Date dtUpdate = convertObj.convertStringToDate(addressDto.getDateUpdate());
 		entity.setAddress(null);
 		entity.setDateUpdate(dtUpdate);
