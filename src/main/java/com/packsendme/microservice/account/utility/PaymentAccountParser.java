@@ -108,8 +108,8 @@ public class PaymentAccountParser {
 		PaymentModel paymentModel = new PaymentModel();
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
+		entity.setId(entity.getId());
 		
-		paymentModel.setId(paymentAccountCruDto.getId());
 		paymentModel.setCardName(paymentAccountCruDto.getCardName());
 		paymentModel.setCardNumber(paymentAccountCruDto.getCardNumber());
 		paymentModel.setCardExpiry(paymentAccountCruDto.getCardExpiry());
