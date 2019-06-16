@@ -27,12 +27,8 @@ public class AccountParser {
 		
 		for (AddressModel addressEntity : entity.getAddress()) {
 			addressNewModel = new AddressModel();
-			System.out.println(" 1 -  addressNewModel ");
-			System.out.println(" 1.1 -  addressNewModel DTO "+ addressDto.getType());
-			System.out.println(" 1 .2-  addressNewModel ENT "+ addressEntity.getType());
 			
 			if(addressEntity.getType().equals(addressDto.getType())) {
-				System.out.println(" 2 -  addressNewModel "+ addressEntity.getType());
 				addressNewModel.setId(addressEntity.getId());
 				addressNewModel.setType(addressEntity.getId());
 				addressNewModel.setAddress(addressEntity.getAddress());
@@ -40,12 +36,10 @@ public class AccountParser {
 				addressNewModel.setType(addressEntity.getType());
 			}
 			else {
-				System.out.println(" 3 -  addressNewModel "+ addressEntity.getType());
 				addressNewModel = addressEntity;	
 			}
 			addressNewEntityL.add(addressNewModel);
 		}
-		System.out.println(" 4 -  addressNewModel "+ addressNewEntityL.size());
 		// MEW ADDRESS ::
 		addressNewModel = new AddressModel();
 		addressNewModel.setType("");
@@ -53,7 +47,6 @@ public class AccountParser {
 		addressNewModel.setMain(accountConst.ADDRESS_ORDER_MAIN);
 		addressNewModel.setType(addressDto.getType());
 		addressNewEntityL.add(addressNewModel);
-		System.out.println(" 5 -  addressNewModel "+ addressNewEntityL.size());
 		
 		Date dtUpdate = convertObj.convertStringToDate(addressDto.getDateUpdate());
 		entity.setAddress(null);
@@ -61,5 +54,4 @@ public class AccountParser {
 		entity.setAddress(addressNewEntityL);
 		return entity;
 	}
-
 }

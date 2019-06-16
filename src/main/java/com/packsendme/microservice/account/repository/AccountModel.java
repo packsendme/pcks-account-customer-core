@@ -39,7 +39,6 @@ public class AccountModel implements Serializable {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("payment")
 	private List<PaymentModel> payment;
-
 	
 	public String getName() {
 		return name;
@@ -65,12 +64,20 @@ public class AccountModel implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public List<PaymentModel> getPayment() {
+		return payment;
+	}
+	public void setPayment(List<PaymentModel> payment) {
+		this.payment = payment;
+	}
+	
 	public List<AddressModel> getAddress() {
 		return address;
 	}
 	public void setAddress(List<AddressModel> address) {
 		this.address = address;
 	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -95,11 +102,6 @@ public class AccountModel implements Serializable {
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-	public List<PaymentModel> getPayment() {
-		return payment;
-	}
-	public void setPayment(List<PaymentModel> payment) {
-		this.payment = payment;
-	}
+
 	
 }
