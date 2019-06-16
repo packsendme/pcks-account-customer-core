@@ -54,7 +54,7 @@ public class PaymentAccountParser {
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
 		
-		if(entity.getPayment().size() >= 1) {
+		if(entity.getPayment() != null) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				paymentModel = new PaymentModel();
 				
@@ -86,7 +86,7 @@ public class PaymentAccountParser {
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
 		
-		if(entity.getPayment().size() >= 1) {
+		if(entity.getPayment()!= null) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				paymentModel = new PaymentModel();
 
@@ -117,7 +117,7 @@ public class PaymentAccountParser {
 		paymentModel.setCardType(paymentAccountCruDto.getCardType());
 		paymentModel.setCardStatus(paymentAccountCruDto.getCardStatus());
 
-		if(entity.getPayment().size() >= 1) {
+		if(entity.getPayment() != null ) {
 			paymentModelL.addAll(entity.getPayment());	
 		}
 
