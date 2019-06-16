@@ -90,7 +90,7 @@ public class PaymentAccountParser {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				paymentModel = new PaymentModel();
 
-				if(paymentEntity.getCardNumber() != paymentAccountCruDto.getCardNumber()) {
+				if(!paymentEntity.getCardNumber().equals(paymentAccountCruDto.getCardNumber())) {
 					paymentModel = paymentEntity;
 					paymentModelL.add(paymentModel);
 				}
