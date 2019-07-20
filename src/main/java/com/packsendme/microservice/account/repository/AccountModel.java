@@ -21,6 +21,8 @@ public class AccountModel implements Serializable {
 	/**
 	 * 
 	 */
+	@Id
+    private String id;
 
 	private String username;
 	private String email;
@@ -28,9 +30,34 @@ public class AccountModel implements Serializable {
 	private String lastName;
 	private Date dateCreation;
 	private Date dateUpdate;
-	
 	private ArrayList<AddressModel> addressL;
 
+	
+    public AccountModel() {
+	}
+
+	public AccountModel(String username, String email, String name, String lastName,Date dateCreation,Date dateUpdate) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.name = name;
+		this.lastName = lastName;
+		this.dateCreation = dateCreation;
+		this.dateUpdate = dateUpdate;
+	}
+	
+	
+	
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("address")

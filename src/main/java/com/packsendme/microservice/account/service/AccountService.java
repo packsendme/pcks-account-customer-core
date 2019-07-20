@@ -2,7 +2,6 @@ package com.packsendme.microservice.account.service;
 
 import java.util.Date;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -46,10 +45,11 @@ public class AccountService {
 	public ResponseEntity<?> registerAccount(AccountDto accountDto) throws Exception {
 		AccountModel accountSave = null;
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATED_ACCOUNT.getAction(), accountSave);
-		AccountModel account = new AccountModel();
-		account = convertToEntity(accountDto);
-		Date dtCreation = convertObj.convertStringToDate(accountDto.getDateCreation());
-		account.setDateCreation(dtCreation);
+		Date dateCreation = convertObj.convertStringToDate(accountDto.getDateCreation());
+		
+		AccountModel account = new AccountModel(accountDto.getUsername(), accountDto.getEmail(), accountDto.getName(), accountDto.getLastName(),dateCreation,
+				dateCreation);
+
 		try {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {
