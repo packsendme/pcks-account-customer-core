@@ -53,7 +53,7 @@ public class AccountController {
 	
 	@PutMapping("/account")
 	public ResponseEntity<?> changeAccount(@Validated @RequestBody AccountDto account) throws Exception {
-		return accountService.updateAccountByAll(account);
+		return accountService.updateAccountPersonalData(account);
 	}
 	
 	// PAYMENT ENTITY

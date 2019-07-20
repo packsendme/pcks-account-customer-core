@@ -20,15 +20,11 @@ public class AccountDto implements Serializable {
 	/**
 	 * 
 	 */
-	@Id
-    private String id;
 	private String username;
-	@JsonIgnoreProperties
-	private String password;
 	private String email;
 	private String name;
+	private String password;
 	private String lastName;
-
 	private String dateCreation;
 	private String dateUpdate;
 	
@@ -69,18 +65,6 @@ public class AccountDto implements Serializable {
 	public void setAddress(List<AddressDto> address) {
 		this.address = address;
 	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getDateCreation() {
 		return dateCreation;
 	}
@@ -92,5 +76,11 @@ public class AccountDto implements Serializable {
 	}
 	public void setDateUpdate(String dateUpdate) {
 		this.dateUpdate = dateUpdate;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

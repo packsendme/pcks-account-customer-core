@@ -1,13 +1,13 @@
 package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,14 +23,41 @@ public class AccountModel implements Serializable {
 	 */
 	@Id
     private String id;
+
 	private String username;
-	@JsonIgnoreProperties
-	private String password;
 	private String email;
 	private String name;
 	private String lastName;
 	private Date dateCreation;
 	private Date dateUpdate;
+	private ArrayList<AddressModel> addressL;
+
+	
+    public AccountModel() {
+	}
+
+	public AccountModel(String username, String email, String name, String lastName,Date dateCreation,Date dateUpdate) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.name = name;
+		this.lastName = lastName;
+		this.dateCreation = dateCreation;
+		this.dateUpdate = dateUpdate;
+	}
+	
+	
+	
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("address")
@@ -77,19 +104,6 @@ public class AccountModel implements Serializable {
 	public void setAddress(List<AddressModel> address) {
 		this.address = address;
 	}
-	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public Date getDateCreation() {
 		return dateCreation;
 	}
@@ -102,6 +116,11 @@ public class AccountModel implements Serializable {
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-
+	public ArrayList<AddressModel> getAddressL() {
+		return addressL;
+	}
+	public void setAddressL(ArrayList<AddressModel> addressL) {
+		this.addressL = addressL;
+	}
 	
 }
