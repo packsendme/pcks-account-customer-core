@@ -53,8 +53,8 @@ public class AccountService {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {
 				// Call IAMService - To allows User Access 
-				ResponseEntity<?> userAccessEnable = iamClient.createUser(account.getUsername(),
-						account.getPassword(), accountDto.getDateCreation());
+				ResponseEntity<?> userAccessEnable = iamClient.createUser(accountDto.getUsername(),
+						accountDto.getPassword(), accountDto.getDateCreation());
 				if(userAccessEnable.getStatusCode() == HttpStatus.ACCEPTED) {
 					return new ResponseEntity<>(responseObj, HttpStatus.ACCEPTED);
 				}
@@ -216,18 +216,19 @@ public class AccountService {
 	}
 
 
-	public ResponseEntity<?> updateAccountByAll(AccountDto accountDto) throws Exception {
-		AccountModel entity = new AccountModel();
-		entity = convertToEntity(accountDto);
-		Date dtCreate = convertObj.convertStringToDate(accountDto.getDateCreation());
-		Date dtUpdate = convertObj.convertStringToDate(accountDto.getDateUpdate());
+	public ResponseEntity<?> updateAccountPersonalData(AccountDto accountDto) throws Exception {
+		AccountModel accountFind = new AccountModel();
+		accountFind.setUsername(accountDto.getUsername());
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
+
 		try {
-			entity.setDateCreation(dtCreate);
-			entity.setDateUpdate(dtUpdate);
-			AccountModel accountFind = accountDAO.find(entity);
-			if(accountFind != null) {
-				entity.setId(accountFind.getId());
+			AccountModel entity = accountDAO.find(accountFind);
+			if(entity != null) {
+				entity.setUsername(accountDto.getUsername());
+				entity.setEmail(accountDto.getEmail());
+				entity.setName(accountDto.getName());
+				entity.setLastName(accountDto.getLastName());
+				entity.setDateUpdate(convertObj.convertStringToDate(accountDto.getDateUpdate()));
 				entity = accountDAO.update(entity);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
