@@ -27,8 +27,6 @@ public class PaymentAccountParser {
 		List<PaymentDto> paymentDtoL = new ArrayList<PaymentDto>();
 		PaymentAccountCollectionDto paymentAccountDto = new PaymentAccountCollectionDto();
 		PaymentDto paymentDto = new PaymentDto();
-		
-		paymentAccountDto.setId(entity.getId());
 		paymentAccountDto.setUsername(entity.getUsername());
 		
 		for (PaymentModel paymentEntity : entity.getPayment()) {
@@ -108,7 +106,6 @@ public class PaymentAccountParser {
 		PaymentModel paymentModel = new PaymentModel();
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
-		entity.setId(entity.getId());
 		
 		paymentModel.setCardName(paymentAccountCruDto.getCardName());
 		paymentModel.setCardNumber(paymentAccountCruDto.getCardNumber());

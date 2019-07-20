@@ -21,8 +21,7 @@ public class AccountModel implements Serializable {
 	/**
 	 * 
 	 */
-	@Id
-    private String id;
+
 	private String username;
 	private String email;
 	private String name;
@@ -77,12 +76,6 @@ public class AccountModel implements Serializable {
 	}
 	public void setAddress(List<AddressModel> address) {
 		this.address = address;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public Date getDateCreation() {
 		return dateCreation;
