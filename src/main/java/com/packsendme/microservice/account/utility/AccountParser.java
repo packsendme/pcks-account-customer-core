@@ -25,20 +25,22 @@ public class AccountParser {
 		List<AddressModel> addressNewEntityL = new ArrayList<AddressModel>();
 		AddressModel addressNewModel = new AddressModel();
 		
-		for (AddressModel addressEntity : entity.getAddress()) {
-			addressNewModel = new AddressModel();
-			
-			if(addressEntity.getType().equals(addressDto.getType())) {
-				addressNewModel.setId(addressEntity.getId());
-				addressNewModel.setType(addressEntity.getId());
-				addressNewModel.setAddress(addressEntity.getAddress());
-				addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
-				addressNewModel.setType(addressEntity.getType());
+		if(entity.getAddress() != null) {
+			for (AddressModel addressEntity : entity.getAddress()) {
+				addressNewModel = new AddressModel();
+					
+				if(addressEntity.getType().equals(addressDto.getType())) {
+					addressNewModel.setId(addressEntity.getId());
+					addressNewModel.setType(addressEntity.getId());
+					addressNewModel.setAddress(addressEntity.getAddress());
+					addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
+					addressNewModel.setType(addressEntity.getType());
+				}
+				else {
+					addressNewModel = addressEntity;	
+				}
+				addressNewEntityL.add(addressNewModel);
 			}
-			else {
-				addressNewModel = addressEntity;	
-			}
-			addressNewEntityL.add(addressNewModel);
 		}
 		// MEW ADDRESS ::
 		addressNewModel = new AddressModel();

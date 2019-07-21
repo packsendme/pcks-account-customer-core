@@ -243,8 +243,6 @@ public class AccountService {
 	}
 	
 	public ResponseEntity<?> updateAddressAccountByUsername(AddressAccountDto addressAccount) throws Exception {
-
-
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 		try {
 			AccountModel accountObj = new AccountModel();
@@ -253,7 +251,7 @@ public class AccountService {
 			
 			// Parser Account Entity - Account Address
 			AccountModel entity = accountParser.parseAddressDtoToAccountModel(accountFind, addressAccount);
-
+			
 			if(entity != null) {
 				entity = accountDAO.update(entity);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
