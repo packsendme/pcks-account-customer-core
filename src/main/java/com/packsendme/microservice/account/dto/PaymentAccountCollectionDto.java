@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.packsendme.microservice.account.repository.PaymentModel;
+import com.packsendme.microservice.account.repository.CardPayModel;
 
 @Document(collection = "PaymentAccount")
 public class PaymentAccountCollectionDto implements Serializable {

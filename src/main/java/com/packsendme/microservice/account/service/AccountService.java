@@ -2,7 +2,6 @@ package com.packsendme.microservice.account.service;
 
 import java.util.Date;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import com.packsendme.lib.utility.ConvertFormat;
 import com.packsendme.microservice.account.controller.IAMClient;
 import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.dto.AccountDto;
+import com.packsendme.microservice.account.dto.AccountLoadDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
 import com.packsendme.microservice.account.dto.PaymentAccountCRUDDto;
 import com.packsendme.microservice.account.dto.PaymentAccountCollectionDto;
@@ -98,35 +98,25 @@ public class AccountService {
 		}
 	}
 
-	
-	
-	private AccountModel convertToEntity(AccountDto accountDto) {
-		//AccountModel accountModel = modelMapper.map(accountDto, AccountDto.class);
-		AccountModel accountModel = new AccountModel();
-		BeanUtils.copyProperties(accountDto, accountModel);
-		return accountModel;
-
-	}
-	
 	public ResponseEntity<?> findPaymentUserByUsername(String username) throws Exception {
 		AccountModel entity = new AccountModel();
 		try {
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 			
-			if(entity != null){
+			if(entity.getPayment() != null){
 				PaymentAccountCollectionDto paymentAccountDto = paymentParser.parsePaymentAccountOperationFind(entity);
 				Response<PaymentAccountCollectionDto> responseObj = new Response<PaymentAccountCollectionDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), paymentAccountDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
 		}
 	}
@@ -200,12 +190,14 @@ public class AccountService {
 		try {
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
+			
 			if(entity != null){
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+				AccountLoadDto accountLoadDto = accountParser.parseAccountModelToAccountLoad(entity);
+				Response<AccountLoadDto> responseObj = new Response<AccountLoadDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), accountLoadDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}

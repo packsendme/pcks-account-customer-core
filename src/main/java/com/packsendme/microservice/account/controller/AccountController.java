@@ -57,6 +57,7 @@ public class AccountController {
 	}
 	
 	// PAYMENT ENTITY
+	
 	@GetMapping("/account/payment/{username}")
 	public ResponseEntity<?> getPayment(@Validated @PathVariable ("username") String username) throws Exception {
 		return accountService.findPaymentUserByUsername(username);
@@ -73,7 +74,7 @@ public class AccountController {
 	}
 	
 	@PostMapping("/account/payment")
-	public ResponseEntity<?> savePayment(@Validated @RequestBody PaymentAccountCRUDDto paymentDto) throws Exception {
+	public ResponseEntity<?> addPayment(@Validated @RequestBody PaymentAccountCRUDDto paymentDto) throws Exception {
 		return accountService.savePaymentAccountByUsername(paymentDto);
 	}
 
