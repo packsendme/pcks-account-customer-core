@@ -12,7 +12,7 @@ import com.packsendme.microservice.account.dto.PaymentAccountCRUDDto;
 import com.packsendme.microservice.account.dto.PaymentAccountCollectionDto;
 import com.packsendme.microservice.account.dto.PaymentDto;
 import com.packsendme.microservice.account.repository.AccountModel;
-import com.packsendme.microservice.account.repository.PaymentModel;
+import com.packsendme.microservice.account.repository.CardPayModel;
 
 @Component
 public class PaymentAccountParser {
@@ -29,7 +29,7 @@ public class PaymentAccountParser {
 		PaymentDto paymentDto = new PaymentDto();
 		paymentAccountDto.setUsername(entity.getUsername());
 		
-		for (PaymentModel paymentEntity : entity.getPayment()) {
+		for (CardPayModel paymentEntity : entity.getPayment()) {
 			paymentDto = new PaymentDto();
 			paymentDto.setId(paymentEntity.getId());
 			paymentDto.setCardName(paymentEntity.getCardName());
@@ -44,20 +44,19 @@ public class PaymentAccountParser {
 		return paymentAccountDto;
 	}
 	
-	// Utiliy to Payment UPDATE Operation
+	//  
 	public AccountModel parsePaymentAccountOperationEdit(AccountModel entity, PaymentAccountCRUDDto paymentAccountCruDto) throws Exception {
 		
-		List<PaymentModel> paymentModelL = new ArrayList<PaymentModel>();
-		PaymentModel paymentModel = new PaymentModel();
+		List<CardPayModel> paymentModelL = new ArrayList<CardPayModel>();
+		CardPayModel paymentModel = new CardPayModel();
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
 		
 		if(entity.getPayment() != null) {
-			for (PaymentModel paymentEntity : entity.getPayment()) {
-				paymentModel = new PaymentModel();
+			for (CardPayModel paymentEntity : entity.getPayment()) {
+				paymentModel = new CardPayModel();
 				
 				if(paymentEntity.getCardNumber().equals(paymentAccountCruDto.getCardNumber())) {
-					paymentModel.setId(paymentAccountCruDto.getId());
 					paymentModel.setCardName(paymentAccountCruDto.getCardName());
 					paymentModel.setCardNumber(paymentAccountCruDto.getCardNumber());
 					paymentModel.setCardExpiry(paymentAccountCruDto.getCardExpiry());
@@ -79,14 +78,14 @@ public class PaymentAccountParser {
 	// Utiliy to Payment DELETE Operation
 	public AccountModel parsePaymentAccountOperationDelete(AccountModel entity, PaymentAccountCRUDDto paymentAccountCruDto) throws Exception {
 		
-		List<PaymentModel> paymentModelL = new ArrayList<PaymentModel>();
-		PaymentModel paymentModel = new PaymentModel();
+		List<CardPayModel> paymentModelL = new ArrayList<CardPayModel>();
+		CardPayModel paymentModel = new CardPayModel();
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
 		
 		if(entity.getPayment()!= null) {
-			for (PaymentModel paymentEntity : entity.getPayment()) {
-				paymentModel = new PaymentModel();
+			for (CardPayModel paymentEntity : entity.getPayment()) {
+				paymentModel = new CardPayModel();
 
 				if(!paymentEntity.getCardNumber().equals(paymentAccountCruDto.getCardNumber())) {
 					paymentModel = paymentEntity;
@@ -102,8 +101,8 @@ public class PaymentAccountParser {
 	// Utiliy to Payment CREATE NEW Operation
 	public AccountModel parsePaymentAccountOperationSave(AccountModel entity, PaymentAccountCRUDDto paymentAccountCruDto) throws Exception {
 		
-		List<PaymentModel> paymentModelL = new ArrayList<PaymentModel>();
-		PaymentModel paymentModel = new PaymentModel();
+		List<CardPayModel> paymentModelL = new ArrayList<CardPayModel>();
+		CardPayModel paymentModel = new CardPayModel();
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountCruDto.getDateUpdate());
 		entity.setDateUpdate(dtUpdate);
 		

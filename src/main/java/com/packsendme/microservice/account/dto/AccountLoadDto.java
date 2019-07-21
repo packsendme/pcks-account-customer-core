@@ -1,4 +1,4 @@
-package com.packsendme.microservice.account.repository;
+package com.packsendme.microservice.account.dto;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Document(collection = "Account")
-public class AccountModel implements Serializable {
+@Document(collection = "AccountLoad")
+public class AccountLoadDto implements Serializable {
 	
 	/**
 	 * 
@@ -30,14 +30,13 @@ public class AccountModel implements Serializable {
 	private String lastName;
 	private Date dateCreation;
 	private Date dateUpdate;
-	private ArrayList<AddressModel> addressL;
-	private ArrayList<CardPayModel> paymentL;
+	private ArrayList<AddressDto> addressL;
 
 	
-    public AccountModel() {
+    public AccountLoadDto() {
 	}
 
-	public AccountModel(String username, String email, String name, String lastName,Date dateCreation,Date dateUpdate) {
+	public AccountLoadDto(String username, String email, String name, String lastName,Date dateCreation,Date dateUpdate) {
 		super();
 		this.username = username;
 		this.email = email;
@@ -62,11 +61,8 @@ public class AccountModel implements Serializable {
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@JsonProperty("address")
-	private List<AddressModel> address;
+	private List<AddressDto> address;
 	
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	@JsonProperty("payment")
-	private List<CardPayModel> payment;
 	
 	public String getName() {
 		return name;
@@ -92,17 +88,11 @@ public class AccountModel implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<CardPayModel> getPayment() {
-		return payment;
-	}
-	public void setPayment(List<CardPayModel> payment) {
-		this.payment = payment;
-	}
 	
-	public List<AddressModel> getAddress() {
+	public List<AddressDto> getAddress() {
 		return address;
 	}
-	public void setAddress(List<AddressModel> address) {
+	public void setAddress(List<AddressDto> address) {
 		this.address = address;
 	}
 	public Date getDateCreation() {
@@ -117,19 +107,11 @@ public class AccountModel implements Serializable {
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-	public ArrayList<AddressModel> getAddressL() {
+	public ArrayList<AddressDto> getAddressL() {
 		return addressL;
 	}
-	public void setAddressL(ArrayList<AddressModel> addressL) {
+	public void setAddressL(ArrayList<AddressDto> addressL) {
 		this.addressL = addressL;
-	}
-
-	public ArrayList<CardPayModel> getPaymentL() {
-		return paymentL;
-	}
-
-	public void setPaymentL(ArrayList<CardPayModel> paymentL) {
-		this.paymentL = paymentL;
 	}
 	
 }

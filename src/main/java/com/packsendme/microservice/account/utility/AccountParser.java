@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.packsendme.lib.utility.ConvertFormat;
+import com.packsendme.microservice.account.dto.AccountLoadDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
+import com.packsendme.microservice.account.dto.AddressDto;
 import com.packsendme.microservice.account.repository.AccountModel;
 import com.packsendme.microservice.account.repository.AddressModel;
 
@@ -55,5 +57,34 @@ public class AccountParser {
 		entity.setDateUpdate(dtUpdate);
 		entity.setAddress(addressNewEntityL);
 		return entity;
+	}
+	
+	public AccountLoadDto parseAccountModelToAccountLoad(AccountModel entity) {
+		
+		List<AddressDto> addressDtoL = new ArrayList<AddressDto>();
+		AccountLoadDto accountLoad = new AccountLoadDto();
+		AddressDto addressDto = new AddressDto();
+		
+		accountLoad.setUsername(entity.getUsername());
+		accountLoad.setEmail(entity.getEmail());
+		accountLoad.setName(entity.getName());
+		accountLoad.setLastName(entity.getLastName());
+		accountLoad.setDateCreation(entity.getDateCreation());
+		accountLoad.setDateUpdate(entity.getDateUpdate());
+		
+		if(entity.getAddress() != null) {
+			for (AddressModel addressEntity : entity.getAddress()) {
+				addressDto = new AddressDto();
+				addressDto.setId(addressEntity.getId());
+				addressDto.setType(addressEntity.getId());
+				addressDto.setAddress(addressEntity.getAddress());
+				addressDto.setMain(addressEntity.getMain()); 
+				addressDto.setType(addressEntity.getType());
+				addressDtoL.add(addressDto);
+			}
+		}
+		// MEW ADDRESS ::
+		accountLoad.setAddress(addressDtoL);
+		return accountLoad;
 	}
 }
