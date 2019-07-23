@@ -49,7 +49,7 @@ public class PaymentAccountService {
 		}
 	}
 	
-	public ResponseEntity<?> updatePaymentAccountByUsername(PaymentDto paymentDto) throws Exception {
+	public ResponseEntity<?> updatePaymentAccountByUsername(PaymentDto paymentDto, String codnumOld) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
 		try {
@@ -57,7 +57,7 @@ public class PaymentAccountService {
 			entity = accountDAO.find(entity);
 
 			if(entity != null) {
-				AccountModel entityObj = paymentParser.parsePaymentAccountOpEdit(entity, paymentDto); 
+				AccountModel entityObj = paymentParser.parsePaymentAccountOpEdit(entity, paymentDto, codnumOld); 
 				entity = accountDAO.update(entityObj);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
