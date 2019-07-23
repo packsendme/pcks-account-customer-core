@@ -1,12 +1,10 @@
  package com.packsendme.microservice.account.dto;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Payment")
+@Document(collection = "CardPayDto")
 public class PaymentDto implements Serializable {
 	
 	/**
@@ -16,58 +14,93 @@ public class PaymentDto implements Serializable {
 	/**
 	 * 
 	 */
-	@Id
-    private String id;
-    private String cardName;
-    private String cardType;
-	private String cardNumber;
-	private String cardExpiry;
-	private String cardCVV;
-	private String cardStatus;
+	
+	private String id;
+	private String username;
+    private String payName;
+    private String payCodenum;
+	private String payGeneralType;
+	private String payType;
+	private String payExpiry;
+	private String payStatus;
+	private String payValue;
+	private String dateCreation;
+	private String dateUpdate;
 	
 	
+	
+	public String getPayName() {
+		return payName;
+	}
+	public void setPayName(String payName) {
+		this.payName = payName;
+	}
+	 
+	public String getPayExpiry() {
+		return payExpiry;
+	}
+	public void setPayExpiry(String payExpiry) {
+		this.payExpiry = payExpiry;
+	}
+	public String getPayStatus() {
+		return payStatus;
+	}
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
+	}
+	public String getPayValue() {
+		return payValue;
+	}
+	public void setPayValue(String payValue) {
+		this.payValue = payValue;
+	}
+	public String getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+	public String getDateUpdate() {
+		return dateUpdate;
+	}
+	public void setDateUpdate(String dateUpdate) {
+		this.dateUpdate = dateUpdate;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getCardName() {
-		return cardName;
+	public String getPayGeneralType() {
+		return payGeneralType;
 	}
-	public void setCardName(String cardName) {
-		this.cardName = cardName;
+	public void setPayGeneralType(String payGeneralType) {
+		this.payGeneralType = payGeneralType;
 	}
-	public String getCardNumber() {
-		return cardNumber;
+	public String getPayCodenum() {
+		return payCodenum;
 	}
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setPayCodenum(String payCodenum) {
+		this.payCodenum = payCodenum;
 	}
-	public String getCardExpiry() {
-		return cardExpiry;
+	public String getPayType() {
+		return payType;
 	}
-	public void setCardExpiry(String cardExpiry) {
-		this.cardExpiry = cardExpiry;
+	public void setPayType(String payType) {
+		this.payType = payType;
 	}
-	public String getCardCVV() {
-		return cardCVV;
+	public String getUsername() {
+		return username;
 	}
-	public void setCardCVV(String cardCVV) {
-		this.cardCVV = cardCVV;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getCardType() {
-		return cardType;
-	}
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
-	}
-	public String getCardStatus() {
-		return cardStatus;
-	}
-	public void setCardStatus(String cardStatus) {
-		this.cardStatus = cardStatus;
-	}
+
+	
+	
+    
+
 
 
 
