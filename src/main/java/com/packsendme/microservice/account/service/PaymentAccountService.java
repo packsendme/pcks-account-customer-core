@@ -95,11 +95,16 @@ public class PaymentAccountService {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATE_PAYMENT.getAction(), entity);
 		try {
+			System.out.println(" USERNAME 0001 "+ paymentDto.getUsername());
+
 			entity.setUsername(paymentDto.getUsername());
 			entity = accountDAO.find(entity);
+			System.out.println("  accountDAO.find "+ entity.getName());
 
 			if(entity != null) {
 				AccountModel entityObj = paymentParser.parsePaymentOpSave(entity, paymentDto);
+				System.out.println("  accountDAO.find "+ entityObj.getPayment().size());
+
 				entity = accountDAO.update(entityObj);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
