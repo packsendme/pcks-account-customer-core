@@ -68,8 +68,8 @@ public class AccountController {
 	}
 
 	@PutMapping("/account/payment")
-	public ResponseEntity<?> changePayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.updatePaymentAccountByUsername(paymentDto);
+	public ResponseEntity<?> changePayment(@Validated @PathVariable ("codnumOld") String codnumOld, @Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.updatePaymentAccountByUsername(paymentDto,codnumOld);
 	}
 	
 	@DeleteMapping("/account/payment")

@@ -77,7 +77,7 @@ public class PaymentAccountParser {
 		return paymentsAccount;
 	}
 	
-	public AccountModel parsePaymentAccountOpEdit(AccountModel entity, PaymentDto paymentAccountDto) throws Exception {
+	public AccountModel parsePaymentAccountOpEdit(AccountModel entity, PaymentDto paymentAccountDto, String codnumOld) throws Exception {
 		
 		Date dtUpdate = convertObj.convertStringToDate(paymentAccountDto.getDateUpdate());
 		List<CardPayModel> cardL = new ArrayList<CardPayModel>();
@@ -87,17 +87,24 @@ public class PaymentAccountParser {
 		List<PaymentModel> paymentL = new ArrayList<PaymentModel>();
 
 		CardPayModel cardPayObj = null;
-		
-		if(paymentAccountDto.getPayType() == PaymentConstants.CARD_PAY) {
-			for (PaymentModel paymentEntity : entity.getPayment()) {
-				if(paymentEntity.getVoucherPayL() != null  && voucherL.size() == 0)  {
-					voucherL.addAll(paymentEntity.getVoucherPayL());
-				}
-				if(paymentEntity.getPromotionPayL() != null  && promotionL.size() == 0)  {
-					promotionL.addAll(paymentEntity.getPromotionPayL());
-				}
+
+		for (PaymentModel paymentEntity : entity.getPayment()) {
+			if(paymentEntity.getVoucherPayL() != null  && voucherL.size() == 0)  {
+				voucherL.addAll(paymentEntity.getVoucherPayL());
+				System.out.println(" VERSION 0001 voucherL "+ voucherL.size());
+			}
+			if(paymentEntity.getPromotionPayL() != null  && promotionL.size() == 0)  {
+				promotionL.addAll(paymentEntity.getPromotionPayL());
+				System.out.println(" VERSION 0002 voucherL "+ promotionL.size());
+
+			}
+		}
+
+		for (PaymentModel paymentEntity : entity.getPayment()) {
+			if(paymentEntity.getCardPayL() != null)  {
 				for (CardPayModel cardEntity : paymentEntity.getCardPayL()) {
-					if(cardEntity.getCardNumber().equals(paymentAccountDto.getPayCodenum())) {
+					if(cardEntity.getCardNumber().equals(codnumOld)) {
+						System.out.println(" VERSION 0003 cardPayObj "+ paymentAccountDto.getPayCodenum());
 						cardPayObj = new CardPayModel();
 						cardPayObj.setCardName(paymentAccountDto.getPayName());
 						cardPayObj.setCardNumber(paymentAccountDto.getPayCodenum());
@@ -107,6 +114,7 @@ public class PaymentAccountParser {
 						cardPayObj.setCardStatus(paymentAccountDto.getPayStatus());
 						cardPayObj.setDateUpdate(dtUpdate);
 						cardL.add(cardPayObj);
+						System.out.println(" VERSION 0004 cardL "+ cardL.size());
 					}
 					else {
 						cardL.add(cardEntity);
@@ -117,10 +125,14 @@ public class PaymentAccountParser {
 		
 		if(voucherL.size() >= 1) {
 			paymentModel.setVoucherPayL(voucherL);
+			System.out.println(" VERSION 0005 setVoucherPayL "+ voucherL.size());
+
 		}
 		if(promotionL.size() >= 1) {
 			paymentModel.setPromotionPayL(promotionL);
 		}
+		System.out.println(" VERSION 0006 cardL "+ cardL.size());
+
 		paymentModel.setCardPayL(cardL);
 		paymentL.add(paymentModel);
 		entity.setPayment(paymentL);
