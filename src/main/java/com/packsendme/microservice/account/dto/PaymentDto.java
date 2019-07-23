@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "CardPayDto")
+@Document(collection = "PaymentDto")
 public class PaymentDto implements Serializable {
 	
 	/**
@@ -14,8 +14,6 @@ public class PaymentDto implements Serializable {
 	/**
 	 * 
 	 */
-	
-	private String id;
 	private String username;
     private String payName;
     private String payCodenum;
@@ -65,12 +63,6 @@ public class PaymentDto implements Serializable {
 	}
 	public void setDateUpdate(String dateUpdate) {
 		this.dateUpdate = dateUpdate;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getPayGeneralType() {
 		return payGeneralType;
