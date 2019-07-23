@@ -260,19 +260,20 @@ public class PaymentAccountParser {
 		
 		Date dtCreation = convertObj.convertStringToDate(paymentAccountDto.getDateCreation());
 
-
-		for (PaymentModel paymentEntity : entity.getPayment()) {
-			if(paymentEntity.getCardPayL() != null)  {
-				cardL.addAll(paymentEntity.getCardPayL());
-			}
-			if(paymentEntity.getVoucherPayL() != null)  {
-				voucherL.addAll(paymentEntity.getVoucherPayL());
-			}
-			if(paymentEntity.getPromotionPayL() != null)  {
-				promotionL.addAll(paymentEntity.getPromotionPayL());
+		if(entity.getPayment() != null) {
+			for (PaymentModel paymentEntity : entity.getPayment()) {
+				if(paymentEntity.getCardPayL() != null)  {
+					cardL.addAll(paymentEntity.getCardPayL());
+				}
+				if(paymentEntity.getVoucherPayL() != null)  {
+					voucherL.addAll(paymentEntity.getVoucherPayL());
+				}
+				if(paymentEntity.getPromotionPayL() != null)  {
+					promotionL.addAll(paymentEntity.getPromotionPayL());
+				}
 			}
 		}
-			
+		
 		
 		if(paymentAccountDto.getPayType() == PaymentConstants.CARD_PAY) {
 			cardPayObj = new CardPayModel();
