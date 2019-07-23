@@ -1,6 +1,8 @@
  package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,6 +24,8 @@ public class CardPayModel implements Serializable {
 	private String cardExpiry;
 	private String cardCVV;
 	private String cardStatus;
+	private Date dateCreation;
+	private Date dateUpdate;
 	
 	
 	public String getId() {
@@ -65,6 +69,18 @@ public class CardPayModel implements Serializable {
 	}
 	public void setCardStatus(String cardStatus) {
 		this.cardStatus = cardStatus;
+	}
+	public Date getDateCreation() {
+		return dateCreation;
+	}
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
+	}
+	public Date getDateUpdate() {
+		return dateUpdate;
+	}
+	public void setDateUpdate(Date dateUpdate) {
+		this.dateUpdate = dateUpdate;
 	}
 
 

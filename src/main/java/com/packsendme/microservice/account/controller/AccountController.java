@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.packsendme.microservice.account.dto.AccountDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
-import com.packsendme.microservice.account.dto.PaymentAccountCRUDDto;
+import com.packsendme.microservice.account.dto.PaymentDto;
 import com.packsendme.microservice.account.service.AccountService;
+import com.packsendme.microservice.account.service.PaymentAccountService;
 
 @RestController
 public class AccountController {
@@ -22,6 +23,9 @@ public class AccountController {
 	
 	@Autowired
 	private AccountService accountService; 
+	
+	@Autowired
+	private PaymentAccountService paymentAccountService;
 	
 	
 	//** BEGIN OPERATION: ACCOUNT FIRST ACCESS *************************************************//
@@ -60,25 +64,28 @@ public class AccountController {
 	
 	@GetMapping("/account/payment/{username}")
 	public ResponseEntity<?> getPayment(@Validated @PathVariable ("username") String username) throws Exception {
-		return accountService.findPaymentUserByUsername(username);
+		return paymentAccountService.loadPaymentAccountAll(username);
 	}
 
 	@PutMapping("/account/payment")
-	public ResponseEntity<?> changePayment(@Validated @RequestBody PaymentAccountCRUDDto paymentDto) throws Exception {
-		return accountService.updatePaymentAccountByUsername(paymentDto);
+	public ResponseEntity<?> changePayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.updatePaymentAccountByUsername(paymentDto);
 	}
 	
 	@DeleteMapping("/account/payment")
-	public ResponseEntity<?> removePayment(@Validated @RequestBody PaymentAccountCRUDDto paymentDto) throws Exception {
-		return accountService.deletePaymentAccountByUsername(paymentDto);
+	public ResponseEntity<?> removePayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.deletePaymentAccountByUsername(paymentDto);
 	}
 	
 	@PostMapping("/account/payment")
-	public ResponseEntity<?> addPayment(@Validated @RequestBody PaymentAccountCRUDDto paymentDto) throws Exception {
-		return accountService.savePaymentAccountByUsername(paymentDto);
+	public ResponseEntity<?> addPayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.savePaymentAccountByUsername(paymentDto);
 	}
 
+	
+	
 	// ADDRESS ENTITY
+	
 	@PutMapping("/account/address")
 	public ResponseEntity<?> changeAddressAccount(@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
 		return accountService.updateAddressAccountByUsername(addressAccount);
