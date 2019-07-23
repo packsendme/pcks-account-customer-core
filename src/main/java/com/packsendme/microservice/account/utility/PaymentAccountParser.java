@@ -274,7 +274,7 @@ public class PaymentAccountParser {
 		
 		System.out.print(" VERSION 0002 "+ paymentAccountDto.getPayType());
 		
-		if(paymentAccountDto.getPayType() == PaymentConstants.CARD_PAY) {
+		if(paymentAccountDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 			System.out.print(" VERSION 0002 "+ PaymentConstants.CARD_PAY);
 
 			cardPayObj = new CardPayModel();
@@ -288,7 +288,7 @@ public class PaymentAccountParser {
 			cardL.add(cardPayObj);
 			
 		}
-		else if(paymentAccountDto.getPayType() == PaymentConstants.VOUCHER_PAY) {
+		else if(paymentAccountDto.getPayType().equals(PaymentConstants.VOUCHER_PAY)) {
 			System.out.print(" VERSION 0002 "+ PaymentConstants.VOUCHER_PAY);
 
 			voucherPayObj = new VoucherPayModel();
@@ -301,7 +301,7 @@ public class PaymentAccountParser {
 			voucherPayObj.setDateCreation(dtCreation);
 			voucherL.add(voucherPayObj);
 		}
-		else if(paymentAccountDto.getPayType() == PaymentConstants.PROMOTION_PAY) {
+		else if(paymentAccountDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
 			System.out.print(" VERSION 0002 "+ PaymentConstants.PROMOTION_PAY);
 
 			promotionPayObj = new PromotionPayModel();
