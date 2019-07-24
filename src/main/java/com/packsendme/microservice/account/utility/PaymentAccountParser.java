@@ -110,7 +110,7 @@ public class PaymentAccountParser {
 			}
 		}
 
-		if(paymentDto.getPayType() == PaymentConstants.CARD_PAY) {
+		if(paymentDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getCardPayL() != null)  {
 					
@@ -135,7 +135,7 @@ public class PaymentAccountParser {
 				}
 			}
 		}
-		else if(paymentDto.getPayType() == PaymentConstants.VOUCHER_PAY) {
+		else if(paymentDto.getPayType().equals(PaymentConstants.VOUCHER_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getVoucherPayL() != null)  {
 					for (VoucherPayModel voucherEntity : paymentEntity.getVoucherPayL()) {
@@ -159,7 +159,7 @@ public class PaymentAccountParser {
 				}
 			}
 		}
-		else if(paymentDto.getPayType() == PaymentConstants.PROMOTION_PAY) {
+		else if(paymentDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getPromotionPayL() != null)  {
 					for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPayL()) {
@@ -233,7 +233,7 @@ public class PaymentAccountParser {
 			}
 		}
 
-		if(paymentDto.getPayType() == PaymentConstants.CARD_PAY) {
+		if(paymentDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getCardPayL() != null)  {
 					
@@ -255,7 +255,7 @@ public class PaymentAccountParser {
 				}
 			}
 		}
-		else if(paymentDto.getPayType() == PaymentConstants.VOUCHER_PAY) {
+		else if(paymentDto.getPayType().equals(PaymentConstants.VOUCHER_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getVoucherPayL() != null)  {
 					for (VoucherPayModel voucherEntity : paymentEntity.getVoucherPayL()) {
@@ -276,7 +276,7 @@ public class PaymentAccountParser {
 				}
 			}
 		}
-		else if(paymentDto.getPayType() == PaymentConstants.PROMOTION_PAY) {
+		else if(paymentDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getPromotionPayL() != null)  {
 					for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPayL()) {
