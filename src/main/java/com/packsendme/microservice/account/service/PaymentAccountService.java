@@ -49,7 +49,7 @@ public class PaymentAccountService {
 		}
 	}
 	
-	public ResponseEntity<?> updatePaymentAccountByUsername(PaymentDto paymentDto, String codnumOld) throws Exception {
+	public ResponseEntity<?> updatePaymentAccountByUsername(String codnumOld,PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
 		try {
