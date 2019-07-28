@@ -78,7 +78,6 @@ public class PaymentAccountParser {
 	}
 	
 	public AccountModel parsePaymentAccountOpEdit(AccountModel entity, PaymentDto paymentDto, String codnumOld) throws Exception {
-		Date dtCreate = convertObj.convertStringToDate(paymentDto.getDateCreation());
 		Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateUpdate());
 		List<CardPayModel> cardL = new ArrayList<CardPayModel>();
 		List<VoucherPayModel> voucherL = new ArrayList<VoucherPayModel>();
@@ -128,7 +127,7 @@ public class PaymentAccountParser {
 							cardPayObj.setCardCVV(paymentDto.getPayValue());
 							cardPayObj.setCardType(paymentDto.getPayGeneralType());
 							cardPayObj.setCardStatus(paymentDto.getPayStatus());
-							cardPayObj.setDateCreation(dtCreate);
+							cardPayObj.setDateCreation(cardEntity.getDateCreation());
 							cardPayObj.setDateUpdate(dtUpdate);
 							cardL.add(cardPayObj);
 							System.out.println(" VERSION 0002 cardL "+ cardL.size());
@@ -153,7 +152,7 @@ public class PaymentAccountParser {
 							voucherPayObj.setVoucherValue(paymentDto.getPayValue());
 							voucherPayObj.setVoucherDescription(paymentDto.getPayGeneralType());
 							voucherPayObj.setVoucherStatus(paymentDto.getPayStatus());
-							voucherPayObj.setDateCreation(dtCreate);
+							voucherPayObj.setDateCreation(voucherEntity.getDateCreation());
 							voucherPayObj.setDateUpdate(dtUpdate);
 							voucherL.add(voucherPayObj);
 							System.out.println(" VERSION 0003 voucherPayObj "+ voucherL.size());
@@ -178,7 +177,7 @@ public class PaymentAccountParser {
 							promotionPayObj.setPromotionValue(paymentDto.getPayValue());
 							promotionPayObj.setPromotionDescription(paymentDto.getPayGeneralType());
 							promotionPayObj.setPromotionStatus(paymentDto.getPayStatus());
-							promotionPayObj.setDateCreation(dtCreate);
+							promotionPayObj.setDateCreation(promotionEntity.getDateCreation());
 							promotionPayObj.setDateUpdate(dtUpdate);
 							promotionL.add(promotionPayObj);
 							System.out.println(" VERSION 0004 cardL "+ promotionL.size());
