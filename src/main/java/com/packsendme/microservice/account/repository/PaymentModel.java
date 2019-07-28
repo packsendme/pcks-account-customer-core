@@ -17,28 +17,28 @@ public class PaymentModel implements Serializable {
 		 * 
 		 */
 
-		private List<CardPayModel> cardPayL;
-		private List<VoucherPayModel> voucherPayL;
-		private List<PromotionPayModel> promotionPayL;
+		private List<CardPayModel> cardPay;
+		private List<VoucherPayModel> voucherPay;
+		private List<PromotionPayModel> promotionPay;
 		
 		
-		public List<CardPayModel> getCardPayL() {
-			return cardPayL;
+		public List<CardPayModel> getCardPay() {
+			return cardPay;
 		}
-		public void setCardPayL(List<CardPayModel> cardPayL) {
-			this.cardPayL = cardPayL;
+		public void setCardPayL(List<CardPayModel> cardPay) {
+			this.cardPay = cardPay;
 		}
-		public List<VoucherPayModel> getVoucherPayL() {
-			return voucherPayL;
+		public List<VoucherPayModel> getVoucherPay() {
+			return voucherPay;
 		}
-		public void setVoucherPayL(List<VoucherPayModel> voucherPayL) {
-			this.voucherPayL = voucherPayL;
+		public void setVoucherPayL(List<VoucherPayModel> voucherPay) {
+			this.voucherPay = voucherPay;
 		}
-		public List<PromotionPayModel> getPromotionPayL() {
-			return promotionPayL;
+		public List<PromotionPayModel> getPromotionPay() {
+			return promotionPay;
 		}
-		public void setPromotionPayL(List<PromotionPayModel> promotionPayL) {
-			this.promotionPayL = promotionPayL;
+		public void setPromotionPayL(List<PromotionPayModel> promotionPay) {
+			this.promotionPay = promotionPay;
 		}
 		
 		
