@@ -20,7 +20,7 @@ public class PromotionPayModel implements Serializable {
     private String id;
     private String promotionName;
     private String promotionNumber;
-	private String promotionDescription;
+	private String promotionEntity;
 	private String promotionExpiry;
 	private String promotionStatus;
 	private String promotionValue;
@@ -46,11 +46,11 @@ public class PromotionPayModel implements Serializable {
 	public void setPromotionNumber(String promotionNumber) {
 		this.promotionNumber = promotionNumber;
 	}
-	public String getPromotionDescription() {
-		return promotionDescription;
+	public String getPromotionEntity() {
+		return promotionEntity;
 	}
-	public void setPromotionDescription(String promotionDescription) {
-		this.promotionDescription = promotionDescription;
+	public void setPromotionEntity(String promotionEntity) {
+		this.promotionEntity = promotionEntity;
 	}
 	public String getPromotionExpiry() {
 		return promotionExpiry;

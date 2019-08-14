@@ -17,7 +17,7 @@ public class PaymentDto implements Serializable {
 	private String username;
     private String payName;
     private String payCodenum;
-	private String payGeneralType;
+	private String payEntity;
 	private String payType;
 	private String payExpiry;
 	private String payStatus;
@@ -64,11 +64,11 @@ public class PaymentDto implements Serializable {
 	public void setDateUpdate(String dateUpdate) {
 		this.dateUpdate = dateUpdate;
 	}
-	public String getPayGeneralType() {
-		return payGeneralType;
+	public String getPayEntity() {
+		return payEntity;
 	}
-	public void setPayGeneralType(String payGeneralType) {
-		this.payGeneralType = payGeneralType;
+	public void setPayEntity(String payEntity) {
+		this.payEntity = payEntity;
 	}
 	public String getPayCodenum() {
 		return payCodenum;

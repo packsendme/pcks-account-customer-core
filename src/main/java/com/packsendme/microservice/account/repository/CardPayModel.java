@@ -19,7 +19,7 @@ public class CardPayModel implements Serializable {
 	@Id
     private String id;
     private String cardName;
-    private String cardType;
+    private String cardEntity;
 	private String cardNumber;
 	private String cardExpiry;
 	private String cardCVV;
@@ -58,11 +58,11 @@ public class CardPayModel implements Serializable {
 	public void setCardCVV(String cardCVV) {
 		this.cardCVV = cardCVV;
 	}
-	public String getCardType() {
-		return cardType;
+	public String getCardEntity() {
+		return cardEntity;
 	}
-	public void setCardType(String cardType) {
-		this.cardType = cardType;
+	public void setCardEntity(String cardEntity) {
+		this.cardEntity= cardEntity;
 	}
 	public String getCardStatus() {
 		return cardStatus;

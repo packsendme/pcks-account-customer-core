@@ -20,7 +20,7 @@ public class VoucherPayModel implements Serializable {
     private String id;
     private String voucherName;
     private String voucherNumber;
-	private String voucherDescription;
+	private String voucherEntity;
 	private String voucherExpiry;
 	private String voucherStatus;
 	private String voucherValue;
@@ -47,11 +47,11 @@ public class VoucherPayModel implements Serializable {
 	public void setVoucherNumber(String voucherNumber) {
 		this.voucherNumber = voucherNumber;
 	}
-	public String getVoucherDescription() {
-		return voucherDescription;
+	public String getVoucherEntity() {
+		return voucherEntity;
 	}
-	public void setVoucherDescription(String voucherDescription) {
-		this.voucherDescription = voucherDescription;
+	public void setVoucherEntity(String voucherEntity) {
+		this.voucherEntity = voucherEntity;
 	}
 	public String getVoucherExpiry() {
 		return voucherExpiry;

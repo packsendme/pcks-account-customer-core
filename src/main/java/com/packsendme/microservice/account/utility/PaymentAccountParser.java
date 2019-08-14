@@ -36,11 +36,11 @@ public class PaymentAccountParser {
 				for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.CARD_PAY );
+					paymentObjDto.setPayEntity(cardEntity.getCardEntity());
 					paymentObjDto.setPayName(cardEntity.getCardName());
 					paymentObjDto.setPayCodenum(cardEntity.getCardNumber());
 					paymentObjDto.setPayExpiry(cardEntity.getCardExpiry());
 					paymentObjDto.setPayValue(cardEntity.getCardCVV());
-					paymentObjDto.setPayGeneralType(cardEntity.getCardType());
 					paymentObjDto.setPayStatus(cardEntity.getCardStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -49,11 +49,11 @@ public class PaymentAccountParser {
 				for (VoucherPayModel voucherEntity : paymentEntity.getVoucherPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.VOUCHER_PAY);
+					paymentObjDto.setPayEntity(voucherEntity.getVoucherEntity());
 					paymentObjDto.setPayName(voucherEntity.getVoucherName());
 					paymentObjDto.setPayCodenum(voucherEntity.getVoucherNumber());
 					paymentObjDto.setPayExpiry(voucherEntity.getVoucherExpiry());
 					paymentObjDto.setPayValue(voucherEntity.getVoucherValue());
-					paymentObjDto.setPayGeneralType(voucherEntity.getVoucherDescription());
 					paymentObjDto.setPayStatus(voucherEntity.getVoucherStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -62,11 +62,11 @@ public class PaymentAccountParser {
 				for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.VOUCHER_PAY);
+					paymentObjDto.setPayEntity(promotionEntity.getPromotionEntity());
 					paymentObjDto.setPayName(promotionEntity.getPromotionName());
 					paymentObjDto.setPayCodenum(promotionEntity.getPromotionNumber());
 					paymentObjDto.setPayExpiry(promotionEntity.getPromotionExpiry());
 					paymentObjDto.setPayValue(promotionEntity.getPromotionValue());
-					paymentObjDto.setPayGeneralType(promotionEntity.getPromotionDescription());
 					paymentObjDto.setPayStatus(promotionEntity.getPromotionStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -125,7 +125,7 @@ public class PaymentAccountParser {
 							cardPayObj.setCardNumber(paymentDto.getPayCodenum());
 							cardPayObj.setCardExpiry(paymentDto.getPayExpiry());
 							cardPayObj.setCardCVV(paymentDto.getPayValue());
-							cardPayObj.setCardType(paymentDto.getPayGeneralType());
+							cardPayObj.setCardEntity(paymentDto.getPayEntity());
 							cardPayObj.setCardStatus(paymentDto.getPayStatus());
 							cardPayObj.setDateCreation(cardEntity.getDateCreation());
 							cardPayObj.setDateUpdate(dtUpdate);
@@ -150,7 +150,7 @@ public class PaymentAccountParser {
 							voucherPayObj.setVoucherNumber(paymentDto.getPayCodenum());
 							voucherPayObj.setVoucherExpiry(paymentDto.getPayExpiry());
 							voucherPayObj.setVoucherValue(paymentDto.getPayValue());
-							voucherPayObj.setVoucherDescription(paymentDto.getPayGeneralType());
+							voucherPayObj.setVoucherEntity(paymentDto.getPayEntity());
 							voucherPayObj.setVoucherStatus(paymentDto.getPayStatus());
 							voucherPayObj.setDateCreation(voucherEntity.getDateCreation());
 							voucherPayObj.setDateUpdate(dtUpdate);
@@ -175,7 +175,7 @@ public class PaymentAccountParser {
 							promotionPayObj.setPromotionNumber(paymentDto.getPayCodenum());
 							promotionPayObj.setPromotionExpiry(paymentDto.getPayExpiry());
 							promotionPayObj.setPromotionValue(paymentDto.getPayValue());
-							promotionPayObj.setPromotionDescription(paymentDto.getPayGeneralType());
+							promotionPayObj.setPromotionEntity(paymentDto.getPayEntity());
 							promotionPayObj.setPromotionStatus(paymentDto.getPayStatus());
 							promotionPayObj.setDateCreation(promotionEntity.getDateCreation());
 							promotionPayObj.setDateUpdate(dtUpdate);
@@ -337,7 +337,7 @@ public class PaymentAccountParser {
 			cardPayObj.setCardNumber(paymentAccountDto.getPayCodenum());
 			cardPayObj.setCardExpiry(paymentAccountDto.getPayExpiry());
 			cardPayObj.setCardCVV(paymentAccountDto.getPayValue());
-			cardPayObj.setCardType(paymentAccountDto.getPayGeneralType());
+			cardPayObj.setCardEntity(paymentAccountDto.getPayEntity());
 			cardPayObj.setCardStatus(PaymentConstants.STATUS_PAY_ACTIVE);
 			cardPayObj.setDateCreation(dtCreation);
 			cardL.add(cardPayObj);
@@ -351,7 +351,7 @@ public class PaymentAccountParser {
 			voucherPayObj.setVoucherNumber(paymentAccountDto.getPayCodenum());
 			voucherPayObj.setVoucherExpiry(paymentAccountDto.getPayExpiry());
 			voucherPayObj.setVoucherValue(paymentAccountDto.getPayValue());
-			voucherPayObj.setVoucherDescription(paymentAccountDto.getPayGeneralType());
+			voucherPayObj.setVoucherEntity(paymentAccountDto.getPayEntity());
 			voucherPayObj.setVoucherStatus(PaymentConstants.STATUS_PAY_ACTIVE);
 			voucherPayObj.setDateCreation(dtCreation);
 			voucherL.add(voucherPayObj);
@@ -364,7 +364,7 @@ public class PaymentAccountParser {
 			promotionPayObj.setPromotionNumber(paymentAccountDto.getPayCodenum());
 			promotionPayObj.setPromotionExpiry(paymentAccountDto.getPayExpiry());
 			promotionPayObj.setPromotionValue(paymentAccountDto.getPayValue());
-			promotionPayObj.setPromotionDescription(paymentAccountDto.getPayGeneralType());
+			promotionPayObj.setPromotionEntity(paymentAccountDto.getPayEntity());
 			promotionPayObj.setPromotionStatus(PaymentConstants.STATUS_PAY_ACTIVE);
 			promotionPayObj.setDateCreation(dtCreation);
 			promotionL.add(promotionPayObj);
