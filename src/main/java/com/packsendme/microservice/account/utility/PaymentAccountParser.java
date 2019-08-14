@@ -61,7 +61,7 @@ public class PaymentAccountParser {
 			if(paymentEntity.getPromotionPay() != null) {
 				for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPay()) {
 					paymentObjDto = new PaymentDto();
-					paymentObjDto.setPayType(PaymentConstants.VOUCHER_PAY);
+					paymentObjDto.setPayType(PaymentConstants.PROMOTION_PAY);
 					paymentObjDto.setPayEntity(promotionEntity.getPromotionEntity());
 					paymentObjDto.setPayName(promotionEntity.getPromotionName());
 					paymentObjDto.setPayCodenum(promotionEntity.getPromotionNumber());
