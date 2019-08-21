@@ -48,6 +48,11 @@ public class AccountController {
 		return accountService.findAccountByEmail(email);
 	}
 	
+	@GetMapping("/account/personalname/{username}")
+	public ResponseEntity<?> loadFirstNameAccount(@Validated @PathVariable ("username") String username) {
+		return accountService.findNamesAccountByUsername(username);
+	}
+	
 	@PutMapping("/account/{username}/{usernamenew}/{dtAction}")
 	public ResponseEntity<?> changeUsernameForAccount(@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("usernamenew") String usernamenew,
