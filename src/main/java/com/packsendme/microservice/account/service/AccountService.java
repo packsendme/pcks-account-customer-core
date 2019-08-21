@@ -114,7 +114,7 @@ public class AccountService {
 		catch (MongoClientException e ) {
 			e.printStackTrace();
 			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
-			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -129,7 +129,7 @@ public class AccountService {
 				nameAccountdDto.setName(entity.getName());
 				nameAccountdDto.setLastName(entity.getLastName());
 				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
-				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
 				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
@@ -139,7 +139,7 @@ public class AccountService {
 		catch (MongoClientException e ) {
 			e.printStackTrace();
 			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
-			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
