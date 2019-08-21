@@ -23,6 +23,7 @@ public class AccountDto implements Serializable {
 	private String name;
 	private String password;
 	private String lastName;
+	private String codcountry;
 	private String dateCreation;
 	private String dateUpdate;
 	
@@ -80,5 +81,11 @@ public class AccountDto implements Serializable {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getCodcountry() {
+		return codcountry;
+	}
+	public void setCodcountry(String codcountry) {
+		this.codcountry = codcountry;
 	}
 }

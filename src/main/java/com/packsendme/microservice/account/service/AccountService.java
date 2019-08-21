@@ -3,7 +3,6 @@ package com.packsendme.microservice.account.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import com.packsendme.microservice.account.dto.AddressAccountDto;
 import com.packsendme.microservice.account.dto.PersonalNamesAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
 import com.packsendme.microservice.account.utility.AccountParser;
-import com.packsendme.microservice.account.utility.PaymentAccountParser;
 
 @Service
 @ComponentScan("com.packsendme.lib.utility")
@@ -39,17 +37,14 @@ public class AccountService {
 	@Autowired
 	private AccountParser accountParser;
 	
-	@Autowired
-	private PaymentAccountParser paymentParser;
-	
 	public ResponseEntity<?> registerAccount(AccountDto accountDto) throws Exception {
 		AccountModel accountSave = null;
 		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATED_ACCOUNT.getAction(), accountSave);
 		Date dateCreation = convertObj.convertStringToDate(accountDto.getDateCreation());
 		
-		AccountModel account = new AccountModel(accountDto.getUsername(), accountDto.getEmail(), accountDto.getName(), accountDto.getLastName(),dateCreation,
-				dateCreation);
-
+		AccountModel account = new AccountModel(accountDto.getUsername(), accountDto.getEmail(), accountDto.getName(), accountDto.getLastName(),
+				accountDto.getCodcountry(),dateCreation,dateCreation);
+ 
 		try {
 			accountSave = accountDAO.add(account); 
 			if(accountSave != null) {

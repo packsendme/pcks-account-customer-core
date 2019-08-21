@@ -70,6 +70,7 @@ public class AccountParser {
 		accountLoad.setEmail(entity.getEmail());
 		accountLoad.setName(entity.getName());
 		accountLoad.setLastName(entity.getLastName());
+		accountLoad.setCodcountry(entity.getCodcountry());
 		accountLoad.setDateCreation(entity.getDateCreation());
 		accountLoad.setDateUpdate(entity.getDateUpdate());
 		
