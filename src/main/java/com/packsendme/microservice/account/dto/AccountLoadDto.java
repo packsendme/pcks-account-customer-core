@@ -28,6 +28,7 @@ public class AccountLoadDto implements Serializable {
 	private String email;
 	private String name;
 	private String lastName;
+	private String codcountry;
 	private Date dateCreation;
 	private Date dateUpdate;
 	private ArrayList<AddressDto> addressL;
@@ -36,12 +37,14 @@ public class AccountLoadDto implements Serializable {
     public AccountLoadDto() {
 	}
 
-	public AccountLoadDto(String username, String email, String name, String lastName,Date dateCreation,Date dateUpdate) {
+	public AccountLoadDto(String username, String email, String name, String lastName, String codcountry, 
+			Date dateCreation,Date dateUpdate) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.name = name;
 		this.lastName = lastName;
+		this.codcountry = codcountry;
 		this.dateCreation = dateCreation;
 		this.dateUpdate = dateUpdate;
 	}
@@ -112,6 +115,14 @@ public class AccountLoadDto implements Serializable {
 	}
 	public void setAddressL(ArrayList<AddressDto> addressL) {
 		this.addressL = addressL;
+	}
+
+	public String getCodcountry() {
+		return codcountry;
+	}
+
+	public void setCodcountry(String codcountry) {
+		this.codcountry = codcountry;
 	}
 	
 }
