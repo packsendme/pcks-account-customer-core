@@ -18,6 +18,7 @@ import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.dto.AccountDto;
 import com.packsendme.microservice.account.dto.AccountLoadDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
+import com.packsendme.microservice.account.dto.PersonalNamesAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
 import com.packsendme.microservice.account.utility.AccountParser;
 import com.packsendme.microservice.account.utility.PaymentAccountParser;
@@ -108,6 +109,31 @@ public class AccountService {
 			if(entity != null){
 				AccountLoadDto accountLoadDto = accountParser.parseAccountModelToAccountLoad(entity);
 				Response<AccountLoadDto> responseObj = new Response<AccountLoadDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), accountLoadDto);
+				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+			}
+			else {
+				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+		}
+		catch (MongoClientException e ) {
+			e.printStackTrace();
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<?> findNamesAccountByUsername(String username) {
+		AccountModel entity = new AccountModel();
+		PersonalNamesAccountDto nameAccountdDto = new PersonalNamesAccountDto();
+		try {
+			entity.setUsername(username);
+			entity = accountDAO.find(entity);
+			
+			if(entity != null){
+				nameAccountdDto.setName(entity.getName());
+				nameAccountdDto.setLastName(entity.getLastName());
+				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
