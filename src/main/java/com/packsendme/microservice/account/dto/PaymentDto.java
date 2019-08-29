@@ -19,12 +19,11 @@ public class PaymentDto implements Serializable {
     private String payCodenum;
 	private String payEntity;
 	private String payType;
+	private String payCountry;
 	private String payExpiry;
 	private String payStatus;
 	private String payValue;
-	private String dateCreation;
-	private String dateUpdate;
-	
+	private String dateOperation;
 	
 	
 	public String getPayName() {
@@ -52,18 +51,6 @@ public class PaymentDto implements Serializable {
 	public void setPayValue(String payValue) {
 		this.payValue = payValue;
 	}
-	public String getDateCreation() {
-		return dateCreation;
-	}
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
-	}
-	public String getDateUpdate() {
-		return dateUpdate;
-	}
-	public void setDateUpdate(String dateUpdate) {
-		this.dateUpdate = dateUpdate;
-	}
 	public String getPayEntity() {
 		return payEntity;
 	}
@@ -87,6 +74,18 @@ public class PaymentDto implements Serializable {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getPayCountry() {
+		return payCountry;
+	}
+	public void setPayCountry(String payCountry) {
+		this.payCountry = payCountry;
+	}
+	public String getDateOperation() {
+		return dateOperation;
+	}
+	public void setDateOperation(String dateOperation) {
+		this.dateOperation = dateOperation;
 	}
 
 	
