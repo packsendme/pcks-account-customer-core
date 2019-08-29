@@ -23,6 +23,7 @@ public class CardPayModel implements Serializable {
 	private String cardNumber;
 	private String cardExpiry;
 	private String cardCVV;
+	private String cardCountry;
 	private String cardStatus;
 	private Date dateCreation;
 	private Date dateUpdate;
@@ -81,6 +82,12 @@ public class CardPayModel implements Serializable {
 	}
 	public void setDateUpdate(Date dateUpdate) {
 		this.dateUpdate = dateUpdate;
+	}
+	public String getCardCountry() {
+		return cardCountry;
+	}
+	public void setCardCountry(String cardCountry) {
+		this.cardCountry = cardCountry;
 	}
 
 

@@ -30,17 +30,17 @@ public class PaymentAccountParser {
 		PaymentsAccountDto paymentsAccount = new PaymentsAccountDto();
 		//paymentAccountDto.setUsername(entity.getUsername());
 		
-		
 		for (PaymentModel paymentEntity : entity.getPayment()) {
 			if(paymentEntity.getCardPay() != null) {
 				for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.CARD_PAY );
-					paymentObjDto.setPayEntity(cardEntity.getCardEntity());
 					paymentObjDto.setPayName(cardEntity.getCardName());
+					paymentObjDto.setPayEntity(cardEntity.getCardEntity());
 					paymentObjDto.setPayCodenum(cardEntity.getCardNumber());
-					paymentObjDto.setPayExpiry(cardEntity.getCardExpiry());
 					paymentObjDto.setPayValue(cardEntity.getCardCVV());
+					paymentObjDto.setPayCountry(cardEntity.getCardCountry());
+					paymentObjDto.setPayExpiry(cardEntity.getCardExpiry());
 					paymentObjDto.setPayStatus(cardEntity.getCardStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -49,11 +49,11 @@ public class PaymentAccountParser {
 				for (VoucherPayModel voucherEntity : paymentEntity.getVoucherPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.VOUCHER_PAY);
-					paymentObjDto.setPayEntity(voucherEntity.getVoucherEntity());
 					paymentObjDto.setPayName(voucherEntity.getVoucherName());
+					paymentObjDto.setPayEntity(voucherEntity.getVoucherEntity());
 					paymentObjDto.setPayCodenum(voucherEntity.getVoucherNumber());
-					paymentObjDto.setPayExpiry(voucherEntity.getVoucherExpiry());
 					paymentObjDto.setPayValue(voucherEntity.getVoucherValue());
+					paymentObjDto.setPayExpiry(voucherEntity.getVoucherExpiry());
 					paymentObjDto.setPayStatus(voucherEntity.getVoucherStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -62,11 +62,11 @@ public class PaymentAccountParser {
 				for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.PROMOTION_PAY);
-					paymentObjDto.setPayEntity(promotionEntity.getPromotionEntity());
 					paymentObjDto.setPayName(promotionEntity.getPromotionName());
+					paymentObjDto.setPayEntity(promotionEntity.getPromotionEntity());
 					paymentObjDto.setPayCodenum(promotionEntity.getPromotionNumber());
-					paymentObjDto.setPayExpiry(promotionEntity.getPromotionExpiry());
 					paymentObjDto.setPayValue(promotionEntity.getPromotionValue());
+					paymentObjDto.setPayExpiry(promotionEntity.getPromotionExpiry());
 					paymentObjDto.setPayStatus(promotionEntity.getPromotionStatus());
 					paymentDtoL.add(paymentObjDto);
 				}
@@ -78,7 +78,7 @@ public class PaymentAccountParser {
 	}
 	
 	public AccountModel parsePaymentAccountOpEdit(AccountModel entity, PaymentDto paymentDto, String codnumOld) throws Exception {
-		Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateUpdate());
+		Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateOperation());
 		List<CardPayModel> cardL = new ArrayList<CardPayModel>();
 		List<VoucherPayModel> voucherL = new ArrayList<VoucherPayModel>();
 		List<PromotionPayModel> promotionL = new ArrayList<PromotionPayModel>();
@@ -89,26 +89,19 @@ public class PaymentAccountParser {
 		VoucherPayModel voucherPayObj = null;
 		PromotionPayModel promotionPayObj = null;
 		
-		System.out.println(" VERSION 000 codnumOld  "+ codnumOld);
-
 		for (PaymentModel paymentEntity : entity.getPayment()) {
-			System.out.println(" VERSION 0001  ");
-
 			if(!paymentDto.getPayType().equals(PaymentConstants.VOUCHER_PAY)) {
 				if(paymentEntity.getVoucherPay() != null  && voucherL.size() == 0)  {
-					System.out.println(" VERSION 0001 VOUCHER_PAY ");
 					voucherL.addAll(paymentEntity.getVoucherPay());
 				}
 			}
 			if(!paymentDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
 				if(paymentEntity.getPromotionPay() != null  && promotionL.size() == 0)  {
-					System.out.println(" VERSION 0001 PROMOTION_PAY ");
 					promotionL.addAll(paymentEntity.getPromotionPay());
 				}
 			}
 			if(!paymentDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 				if(paymentEntity.getCardPay() != null  && cardL.size() == 0)  {
-					System.out.println(" VERSION 0001 CARD_PAY ");
 					cardL.addAll(paymentEntity.getCardPay());
 				}
 			}
@@ -119,7 +112,6 @@ public class PaymentAccountParser {
 				if(paymentEntity.getCardPay() != null)  {
 					for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
 						if(cardEntity.getCardNumber().equals(codnumOld)) {
-							System.out.println(" VERSION 0002 cardPayObj "+ paymentDto.getPayCodenum());
 							cardPayObj = new CardPayModel();
 							cardPayObj.setCardName(paymentDto.getPayName());
 							cardPayObj.setCardNumber(paymentDto.getPayCodenum());
@@ -193,22 +185,14 @@ public class PaymentAccountParser {
 		
 		if(voucherL.size() >= 1) {
 			paymentModel.setVoucherPayL(voucherL);
-			System.out.println(" VERSION 0005 voucherL "+ voucherL.size());
-
 		}
 		if(promotionL.size() >= 1) {
 			paymentModel.setPromotionPayL(promotionL);
-			System.out.println(" VERSION 0005 promotionL "+ promotionL.size());
-
 		}
 		if(cardL.size() >= 1) {
 			paymentModel.setCardPayL(cardL);
-			System.out.println(" VERSION 0005 cardL "+ promotionL.size());
-
 		}
 		paymentL.add(paymentModel);
-		System.out.println(" VERSION 0006 paymentL "+ paymentL.size());
-
 		entity.setPayment(paymentL);
 		return entity;
 	}
@@ -273,8 +257,6 @@ public class PaymentAccountParser {
 				}
 			}
 		}
-		
-		
 		if(voucherL.size() >= 1) {
 			paymentModel.setVoucherPayL(voucherL);
 		}
@@ -284,7 +266,6 @@ public class PaymentAccountParser {
 		if(cardL.size() >= 1) {
 			paymentModel.setCardPayL(cardL);
 		}
-		
 		if(cardL.size() >= 1 || promotionL.size() >= 1 || voucherL.size() >= 1) {
 			paymentL.add(paymentModel);
 			entity.setPayment(paymentL);			
@@ -310,10 +291,9 @@ public class PaymentAccountParser {
 		List<PromotionPayModel> promotionL = new ArrayList<PromotionPayModel>();
 
 		
-		Date dtCreation = convertObj.convertStringToDate(paymentAccountDto.getDateCreation());
+		Date dtOperation = convertObj.convertStringToDate(paymentAccountDto.getDateOperation());
 
 		if(entity.getPayment() != null) {
-			System.out.print(" VERSION 0001 ");
 			for (PaymentModel paymentEntity : entity.getPayment()) {
 				if(paymentEntity.getCardPay() != null)  {
 					cardL.addAll(paymentEntity.getCardPay());
@@ -327,19 +307,16 @@ public class PaymentAccountParser {
 			}
 		}
 		
-		System.out.print(" VERSION 0002 "+ paymentAccountDto.getPayType());
-		
 		if(paymentAccountDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
-			System.out.print(" VERSION 0002 "+ PaymentConstants.CARD_PAY);
-
 			cardPayObj = new CardPayModel();
 			cardPayObj.setCardName(paymentAccountDto.getPayName());
+			cardPayObj.setCardCountry(paymentAccountDto.getPayCountry());
 			cardPayObj.setCardNumber(paymentAccountDto.getPayCodenum());
 			cardPayObj.setCardExpiry(paymentAccountDto.getPayExpiry());
 			cardPayObj.setCardCVV(paymentAccountDto.getPayValue());
 			cardPayObj.setCardEntity(paymentAccountDto.getPayEntity());
 			cardPayObj.setCardStatus(PaymentConstants.STATUS_PAY_ACTIVE);
-			cardPayObj.setDateCreation(dtCreation);
+			cardPayObj.setDateCreation(dtOperation);
 			cardL.add(cardPayObj);
 			
 		}
@@ -353,7 +330,7 @@ public class PaymentAccountParser {
 			voucherPayObj.setVoucherValue(paymentAccountDto.getPayValue());
 			voucherPayObj.setVoucherEntity(paymentAccountDto.getPayEntity());
 			voucherPayObj.setVoucherStatus(PaymentConstants.STATUS_PAY_ACTIVE);
-			voucherPayObj.setDateCreation(dtCreation);
+			voucherPayObj.setDateCreation(dtOperation);
 			voucherL.add(voucherPayObj);
 		}
 		else if(paymentAccountDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
@@ -366,7 +343,7 @@ public class PaymentAccountParser {
 			promotionPayObj.setPromotionValue(paymentAccountDto.getPayValue());
 			promotionPayObj.setPromotionEntity(paymentAccountDto.getPayEntity());
 			promotionPayObj.setPromotionStatus(PaymentConstants.STATUS_PAY_ACTIVE);
-			promotionPayObj.setDateCreation(dtCreation);
+			promotionPayObj.setDateCreation(dtOperation);
 			promotionL.add(promotionPayObj);
 		}
 		
