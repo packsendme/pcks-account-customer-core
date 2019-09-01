@@ -35,7 +35,6 @@ public class PaymentAccountParser {
 				for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
 					paymentObjDto = new PaymentDto();
 					paymentObjDto.setPayType(PaymentConstants.CARD_PAY );
-					paymentObjDto.setPayName(cardEntity.getCardName());
 					paymentObjDto.setPayEntity(cardEntity.getCardEntity());
 					paymentObjDto.setPayCodenum(cardEntity.getCardNumber());
 					paymentObjDto.setPayValue(cardEntity.getCardCVV());
@@ -113,7 +112,6 @@ public class PaymentAccountParser {
 					for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
 						if(cardEntity.getCardNumber().equals(codnumOld)) {
 							cardPayObj = new CardPayModel();
-							cardPayObj.setCardName(paymentDto.getPayName());
 							cardPayObj.setCardNumber(paymentDto.getPayCodenum());
 							cardPayObj.setCardExpiry(paymentDto.getPayExpiry());
 							cardPayObj.setCardCVV(paymentDto.getPayValue());
@@ -309,7 +307,6 @@ public class PaymentAccountParser {
 		
 		if(paymentAccountDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 			cardPayObj = new CardPayModel();
-			cardPayObj.setCardName(paymentAccountDto.getPayName());
 			cardPayObj.setCardCountry(paymentAccountDto.getPayCountry());
 			cardPayObj.setCardNumber(paymentAccountDto.getPayCodenum());
 			cardPayObj.setCardExpiry(paymentAccountDto.getPayExpiry());
