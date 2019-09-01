@@ -34,24 +34,24 @@ public class PaymentAccountService {
 			
 			if(entity.getPayment() != null){
 				PaymentsAccountDto paymentAccountDto = paymentParser.parsePaymentAccountOpLoad(entity);
-				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentAccountDto);
+				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentAccountDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
 		}
 	}
 	
 	public ResponseEntity<?> updatePaymentAccountByUsername(String codnumOld,PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
 		try {
 			entity.setUsername(paymentDto.getUsername());
 			entity = accountDAO.find(entity);
@@ -72,7 +72,7 @@ public class PaymentAccountService {
 
 	public ResponseEntity<?> deletePaymentAccountByUsername(PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.DELETE_PAYMENT.getAction(), entity);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.DELETE_PAYMENT.getAction(), entity);
 		try {
 			entity.setUsername(paymentDto.getUsername());
 			entity = accountDAO.find(entity);
@@ -93,7 +93,7 @@ public class PaymentAccountService {
 	
 	public ResponseEntity<?> savePaymentAccountByUsername(PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATE_PAYMENT.getAction(), entity);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.CREATE_PAYMENT.getAction(), entity);
 		try {
 			System.out.println(" USERNAME 0001 "+ paymentDto.getUsername());
 

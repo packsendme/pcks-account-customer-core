@@ -18,7 +18,6 @@ public class CardPayModel implements Serializable {
 	 */
 	@Id
     private String id;
-    private String cardName;
     private String cardEntity;
 	private String cardNumber;
 	private String cardExpiry;
@@ -34,12 +33,6 @@ public class CardPayModel implements Serializable {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getCardName() {
-		return cardName;
-	}
-	public void setCardName(String cardName) {
-		this.cardName = cardName;
 	}
 	public String getCardNumber() {
 		return cardNumber;

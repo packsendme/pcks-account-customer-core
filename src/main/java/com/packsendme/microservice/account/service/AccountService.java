@@ -39,7 +39,7 @@ public class AccountService {
 	
 	public ResponseEntity<?> registerAccount(AccountDto accountDto) throws Exception {
 		AccountModel accountSave = null;
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.CREATED_ACCOUNT.getAction(), accountSave);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.CREATED_ACCOUNT.getAction(), accountSave);
 		Date dateCreation = convertObj.convertStringToDate(accountDto.getDateCreation());
 		
 		AccountModel account = new AccountModel(accountDto.getUsername(), accountDto.getEmail(), accountDto.getName(), accountDto.getLastName(),
@@ -73,7 +73,7 @@ public class AccountService {
 	
 	public ResponseEntity<?> updateAccountByUsername(String username, String usernamenew, String dtAction) throws Exception {
 		AccountModel entity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_USERNAME.getAction(), entity);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_USERNAME.getAction(), entity);
 		Date dtUpdate = convertObj.convertStringToDate(dtAction);
 		try {
 			entity.setUsername(username);
@@ -103,17 +103,17 @@ public class AccountService {
 			
 			if(entity != null){
 				AccountLoadDto accountLoadDto = accountParser.parseAccountModelToAccountLoad(entity);
-				Response<AccountLoadDto> responseObj = new Response<AccountLoadDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), accountLoadDto);
+				Response<AccountLoadDto> responseObj = new Response<AccountLoadDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), accountLoadDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -128,17 +128,17 @@ public class AccountService {
 			if(entity != null){
 				nameAccountdDto.setName(entity.getName());
 				nameAccountdDto.setLastName(entity.getLastName());
-				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
+				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
-				Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
+				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
 		catch (MongoClientException e ) {
 			e.printStackTrace();
-			Response<AccountModel> responseErrorObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), entity);
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -147,7 +147,7 @@ public class AccountService {
 	public ResponseEntity<?> updateAccountPersonalData(AccountDto accountDto) throws Exception {
 		AccountModel accountFind = new AccountModel();
 		accountFind.setUsername(accountDto.getUsername());
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 
 		try {
 			AccountModel entity = accountDAO.find(accountFind);
@@ -170,7 +170,7 @@ public class AccountService {
 	}
 	
 	public ResponseEntity<?> updateAddressAccountByUsername(AddressAccountDto addressAccount) throws Exception {
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 		try {
 			AccountModel accountObj = new AccountModel();
 			accountObj.setUsername(addressAccount.getUsername());
@@ -195,7 +195,7 @@ public class AccountService {
 	
 	public ResponseEntity<?> findAccountByEmail(String email) {
 		AccountModel accountEntity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
 		try {
 			accountEntity.setEmail(email);
 			AccountModel entity = accountDAO.find(accountEntity);
