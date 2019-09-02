@@ -83,8 +83,10 @@ public class AccountController {
 	}
 	
 	@PostMapping("/account/payment")
-	public ResponseEntity<?> addPayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.savePaymentAccountByUsername(paymentDto);
+	public ResponseEntity<?> addPayment(
+			@Validated @PathVariable ("username") String username,
+			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.savePaymentAccountByUsername(username,paymentDto);
 	}
 
 	
