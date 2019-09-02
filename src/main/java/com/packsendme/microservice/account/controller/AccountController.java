@@ -82,7 +82,7 @@ public class AccountController {
 		return paymentAccountService.deletePaymentAccountByUsername(paymentDto);
 	}
 	
-	@PostMapping("/account/payment")
+	@PostMapping("/account/payment/{username}")
 	public ResponseEntity<?> addPayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
