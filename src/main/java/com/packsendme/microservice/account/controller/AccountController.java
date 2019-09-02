@@ -31,7 +31,8 @@ public class AccountController {
 	//** BEGIN OPERATION: ACCOUNT FIRST ACCESS *************************************************//
 
 	@PostMapping("/account")
-	public ResponseEntity<?> createAccount(@Validated @RequestBody AccountDto account) throws Exception {
+	public ResponseEntity<?> createAccount(
+			@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.registerAccount(account);
 	}
 
@@ -39,47 +40,58 @@ public class AccountController {
 
 	// ACCOUNT ENTITY
 	@GetMapping("/account/{username}/load")
-	public ResponseEntity<?> loadAccount(@Validated @PathVariable ("username") String username) throws Exception {
+	public ResponseEntity<?> loadAccount(
+			@Validated @PathVariable ("username") String username) throws Exception {
 		return accountService.findAccountToLoad(username);
 	}
 
 	@GetMapping("/account/{email}")
-	public ResponseEntity<?> validateEmailAccount(@Validated @PathVariable ("email") String email) {
+	public ResponseEntity<?> validateEmailAccount(
+			@Validated @PathVariable ("email") String email) {
 		return accountService.findAccountByEmail(email);
 	}
 	
 	@GetMapping("/account/personalname/{username}")
-	public ResponseEntity<?> loadFirstNameAccount(@Validated @PathVariable ("username") String username) {
+	public ResponseEntity<?> loadFirstNameAccount(
+			@Validated @PathVariable ("username") String username) {
 		return accountService.findNamesAccountByUsername(username);
 	}
 	
 	@PutMapping("/account/{username}/{usernamenew}/{dtAction}")
-	public ResponseEntity<?> changeUsernameForAccount(@Validated @PathVariable ("username") String username,
+	public ResponseEntity<?> changeUsernameForAccount(
+			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("usernamenew") String usernamenew,
 			@Validated @PathVariable ("dtAction") String dtAction) throws Exception {
 		return accountService.updateAccountByUsername(username,usernamenew,dtAction);
 	}
 	
 	@PutMapping("/account")
-	public ResponseEntity<?> changeAccount(@Validated @RequestBody AccountDto account) throws Exception {
+	public ResponseEntity<?> changeAccount(
+			@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.updateAccountPersonalData(account);
 	}
 	
 	// PAYMENT ENTITY
 	
 	@GetMapping("/account/payment/{username}")
-	public ResponseEntity<?> getPayment(@Validated @PathVariable ("username") String username) throws Exception {
+	public ResponseEntity<?> getPayment(
+			@Validated @PathVariable ("username") String username) throws Exception {
 		return paymentAccountService.loadPaymentAccountAll(username);
 	}
 
-	@PutMapping("/account/payment/{codnumOld}")
-	public ResponseEntity<?> changePayment(@Validated @PathVariable ("codnumOld") String codnumOld, @Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.updatePaymentAccountByUsername(codnumOld,paymentDto);
+	@PutMapping("/account/payment/{username}/{codnumOld}")
+	public ResponseEntity<?> changePayment(
+			@Validated @PathVariable ("username") String username,
+			@Validated @PathVariable ("codnumOld") String codnumOld, 
+			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.updatePaymentAccountByUsername(username,codnumOld,paymentDto);
 	}
 	
-	@DeleteMapping("/account/payment")
-	public ResponseEntity<?> removePayment(@Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.deletePaymentAccountByUsername(paymentDto);
+	@DeleteMapping("/account/payment/{username}")
+	public ResponseEntity<?> removePayment(
+			@Validated @PathVariable ("username") String username,
+			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
+		return paymentAccountService.deletePaymentAccountByUsername(username,paymentDto);
 	}
 	
 	@PostMapping("/account/payment/{username}")
@@ -94,7 +106,8 @@ public class AccountController {
 	// ADDRESS ENTITY
 	
 	@PutMapping("/account/address")
-	public ResponseEntity<?> changeAddressAccount(@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
+	public ResponseEntity<?> changeAddressAccount(
+			@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
 		return accountService.updateAddressAccountByUsername(addressAccount);
 	}
 	
