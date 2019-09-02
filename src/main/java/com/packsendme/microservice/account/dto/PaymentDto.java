@@ -14,7 +14,6 @@ public class PaymentDto implements Serializable {
 	/**
 	 * 
 	 */
-	private String username;
     private String payName;
     private String payCodenum;
 	private String payEntity;
@@ -68,12 +67,6 @@ public class PaymentDto implements Serializable {
 	}
 	public void setPayType(String payType) {
 		this.payType = payType;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getPayCountry() {
 		return payCountry;

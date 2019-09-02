@@ -49,11 +49,11 @@ public class PaymentAccountService {
 		}
 	}
 	
-	public ResponseEntity<?> updatePaymentAccountByUsername(String codnumOld,PaymentDto paymentDto) throws Exception {
+	public ResponseEntity<?> updatePaymentAccountByUsername(String username, String codnumOld,PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
 		try {
-			entity.setUsername(paymentDto.getUsername());
+			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 
 			if(entity != null) {
@@ -70,11 +70,11 @@ public class PaymentAccountService {
 		}
 	}
 
-	public ResponseEntity<?> deletePaymentAccountByUsername(PaymentDto paymentDto) throws Exception {
+	public ResponseEntity<?> deletePaymentAccountByUsername(String username, PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.DELETE_PAYMENT.getAction(), entity);
 		try {
-			entity.setUsername(paymentDto.getUsername());
+			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 
 			if(entity != null) {
