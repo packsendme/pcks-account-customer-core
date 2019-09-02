@@ -312,7 +312,7 @@ public class PaymentAccountParser {
 			cardPayObj.setCardExpiry(paymentAccountDto.getPayExpiry());
 			cardPayObj.setCardCVV(paymentAccountDto.getPayValue());
 			cardPayObj.setCardEntity(paymentAccountDto.getPayEntity());
-			cardPayObj.setCardStatus(PaymentConstants.STATUS_PAY_ACTIVE);
+			cardPayObj.setCardStatus(paymentAccountDto.getPayStatus());
 			cardPayObj.setDateCreation(dtOperation);
 			cardL.add(cardPayObj);
 			
