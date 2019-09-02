@@ -91,28 +91,25 @@ public class PaymentAccountService {
 		}
 	}
 	
-	public ResponseEntity<?> savePaymentAccountByUsername(PaymentDto paymentDto) throws Exception {
+	public ResponseEntity<?> savePaymentAccountByUsername(String username, PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.CREATE_PAYMENT.getAction(), entity);
 		try {
-			System.out.println(" USERNAME 0001 "+ paymentDto.getUsername());
+				entity.setUsername(username);
+				entity = accountDAO.find(entity);
+				System.out.println("  accountDAO.find "+ entity.getName());
 
-			entity.setUsername(paymentDto.getUsername());
-			entity = accountDAO.find(entity);
-			System.out.println("  accountDAO.find "+ entity.getName());
-
-			if(entity != null) {
-				AccountModel entityObj = paymentParser.parsePaymentOpSave(entity, paymentDto);
-				System.out.println("  accountDAO.find "+ entityObj.getPayment().size());
-
-				entity = accountDAO.update(entityObj);
-				return new ResponseEntity<>(responseObj, HttpStatus.OK);
-			}
-			else {
-				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
-			}
-		}
-		catch (MongoClientException e ) {
+				if(entity != null) {
+					AccountModel entityObj = paymentParser.parsePaymentOpSave(entity, paymentDto);
+					System.out.println("  accountDAO.find "+ entityObj.getPayment().size());
+	
+					entity = accountDAO.update(entityObj);
+					return new ResponseEntity<>(responseObj, HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+				}
+		}catch (MongoClientException e ) {
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
