@@ -97,7 +97,6 @@ public class PaymentAccountService {
 		try {
 				entity.setUsername(username);
 				entity = accountDAO.find(entity);
-				System.out.println("  accountDAO.find "+ entity.getName());
 
 				if(entity != null) {
 					AccountModel entityObj = paymentParser.parsePaymentOpSave(entity, paymentDto);
