@@ -115,6 +115,7 @@ public class PaymentAccountParser {
 							cardPayObj.setCardNumber(paymentDto.getPayCodenum());
 							cardPayObj.setCardExpiry(paymentDto.getPayExpiry());
 							cardPayObj.setCardCVV(paymentDto.getPayValue());
+							cardPayObj.setCardCountry(paymentDto.getPayCountry());
 							cardPayObj.setCardEntity(paymentDto.getPayEntity());
 							cardPayObj.setCardStatus(paymentDto.getPayStatus());
 							cardPayObj.setDateCreation(cardEntity.getDateCreation());
