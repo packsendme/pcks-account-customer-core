@@ -87,11 +87,12 @@ public class AccountController {
 		return paymentAccountService.updatePaymentAccountByUsername(username,codnumOld,paymentDto);
 	}
 	
-	@DeleteMapping("/account/payment/{username}")
+	@DeleteMapping("/account/payment/{username}/{payCodenum}/{payType}")
 	public ResponseEntity<?> removePayment(
 			@Validated @PathVariable ("username") String username,
-			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.deletePaymentAccountByUsername(username,paymentDto);
+			@Validated @PathVariable ("payCodenum") String payCodenum,
+			@Validated @PathVariable ("payType") String payType) throws Exception {
+		return paymentAccountService.deletePaymentAccountByUsername(username, payCodenum, payType);
 	}
 	
 	@PostMapping("/account/payment/{username}")
