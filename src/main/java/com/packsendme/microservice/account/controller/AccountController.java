@@ -78,6 +78,13 @@ public class AccountController {
 			@Validated @PathVariable ("username") String username) throws Exception {
 		return paymentAccountService.loadPaymentAccountAll(username);
 	}
+	
+	@GetMapping("/account/payment/{username}/{codnum}")
+	public ResponseEntity<?> getPaymentByCodnum(
+			@Validated @PathVariable ("username") String username,
+			@Validated @PathVariable ("codnum") String codnum) throws Exception {
+		return paymentAccountService.loadPaymentAccountAll(username);
+	}
 
 	@PutMapping("/account/payment/{username}/{codnumOld}")
 	public ResponseEntity<?> changePayment(

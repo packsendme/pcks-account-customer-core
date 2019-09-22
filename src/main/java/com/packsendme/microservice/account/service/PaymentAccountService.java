@@ -13,6 +13,8 @@ import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.dto.PaymentDto;
 import com.packsendme.microservice.account.dto.PaymentsAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
+import com.packsendme.microservice.account.repository.CardPayModel;
+import com.packsendme.microservice.account.repository.PaymentModel;
 import com.packsendme.microservice.account.utility.PaymentAccountParser;
 
 
@@ -48,6 +50,42 @@ public class PaymentAccountService {
 			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	public ResponseEntity<?> loadPaymentAccountByCod(String username, String codnum) throws Exception {
+		AccountModel entity = new AccountModel();
+		try {
+			entity.setUsername(username);
+			entity = accountDAO.find(entity);
+			boolean resultQuery = false;
+			
+			if(entity.getPayment() != null){
+				for (PaymentModel paymentEntity : entity.getPayment()) {
+					if(paymentEntity.getCardPay() != null) {
+						for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
+							if (cardEntity.getCardNumber() == codnum) {
+								resultQuery = true;
+							}
+						}
+					}
+				}
+			}
+			
+			if(resultQuery == true) {
+				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
+			}
+			else {
+				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+		}
+		catch (MongoClientException e ) {
+			e.printStackTrace();
+			Response<AccountModel> responseErrorObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+			return new ResponseEntity<>(responseErrorObj, HttpStatus.NOT_FOUND);
+		}
+	}
+
 	
 	public ResponseEntity<?> updatePaymentAccountByUsername(String username, String codnumOld,PaymentDto paymentDto) throws Exception {
 		AccountModel entity = new AccountModel();
