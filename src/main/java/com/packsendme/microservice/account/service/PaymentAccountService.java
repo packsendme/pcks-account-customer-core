@@ -70,10 +70,14 @@ public class PaymentAccountService {
 		}
 	}
 
-	public ResponseEntity<?> deletePaymentAccountByUsername(String username, PaymentDto paymentDto) throws Exception {
+	public ResponseEntity<?> deletePaymentAccountByUsername(String username, String payCodenum, String payType) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.DELETE_PAYMENT.getAction(), entity);
 		try {
+			PaymentDto paymentDto = new PaymentDto();
+			paymentDto.setPayCodenum(payCodenum);
+			paymentDto.setPayType(payType);
+			
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 
