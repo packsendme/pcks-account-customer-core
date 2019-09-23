@@ -54,6 +54,7 @@ public class PaymentAccountService {
 	public ResponseEntity<?> loadPaymentAccountByCod(String username, String codnum) throws Exception {
 		AccountModel entity = new AccountModel();
 		try {
+			System.out.print(" loadPaymentAccountByCod + username ! codnum "+username+" "+codnum );
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 			boolean resultQuery = false;
@@ -62,7 +63,9 @@ public class PaymentAccountService {
 				for (PaymentModel paymentEntity : entity.getPayment()) {
 					if(paymentEntity.getCardPay() != null) {
 						for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
-							if (cardEntity.getCardNumber() == codnum) {
+							System.out.print(" loadPaymentAccountByCod  codnum "+cardEntity.getCardNumber());
+
+							if (cardEntity.getCardNumber().equals(codnum)) {
 								resultQuery = true;
 							}
 						}
@@ -70,6 +73,8 @@ public class PaymentAccountService {
 				}
 			}
 			
+			System.out.print(" loadPaymentAccountByCod  RESULT "+resultQuery);
+
 			if(resultQuery == true) {
 				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
