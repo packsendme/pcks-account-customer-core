@@ -24,7 +24,7 @@ public class AccountModel implements Serializable {
 	private String email;
 	private String name;
 	private String lastName;
-	private String codcountry;
+	private String country;
 	private Date dateCreation;
 	private Date dateUpdate;
 	private List<AddressModel> address;
@@ -34,21 +34,15 @@ public class AccountModel implements Serializable {
     public AccountModel() {
 	}
 
-	public AccountModel(String username, String email, String name, String lastName, String codcountry, Date dateCreation,Date dateUpdate) {
+	public AccountModel(String username, String email, String name, String lastName, String country, Date dateOperation) {
 		super();
 		this.username = username;
 		this.email = email;
 		this.name = name;
 		this.lastName = lastName;
-		this.setCodcountry(codcountry);
-		this.dateCreation = dateCreation;
-		this.dateUpdate = dateUpdate;
+		this.country = country;
+		this.dateCreation = dateOperation;
 	}
-	
-	
-	
-	
-	
 	
 	public String getId() {
 		return id;
@@ -56,8 +50,6 @@ public class AccountModel implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -113,11 +105,11 @@ public class AccountModel implements Serializable {
 	}
 
 	public String getCodcountry() {
-		return codcountry;
+		return country;
 	}
 
-	public void setCodcountry(String codcountry) {
-		this.codcountry = codcountry;
+	public void setCountry(String country) {
+		this.country = country;
 	}
  
 	

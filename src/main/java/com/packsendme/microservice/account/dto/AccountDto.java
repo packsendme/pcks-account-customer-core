@@ -23,9 +23,8 @@ public class AccountDto implements Serializable {
 	private String name;
 	private String password;
 	private String lastName;
-	private String codcountry;
-	private String dateCreation;
-	private String dateUpdate;
+	private String country;
+	private String dateOperation;
 	
 	
 	
@@ -64,28 +63,23 @@ public class AccountDto implements Serializable {
 	public void setAddress(List<AddressDto> address) {
 		this.address = address;
 	}
-	public String getDateCreation() {
-		return dateCreation;
+	public String getDateOperation() {
+		return dateOperation;
 	}
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setDateOperation(String dateOperation) {
+		this.dateOperation = dateOperation;
 	}
-	public String getDateUpdate() {
-		return dateUpdate;
-	}
-	public void setDateUpdate(String dateUpdate) {
-		this.dateUpdate = dateUpdate;
-	}
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCodcountry() {
-		return codcountry;
+	public String getCountry() {
+		return country;
 	}
-	public void setCodcountry(String codcountry) {
-		this.codcountry = codcountry;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 }
