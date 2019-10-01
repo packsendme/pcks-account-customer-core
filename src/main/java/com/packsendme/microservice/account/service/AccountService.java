@@ -104,7 +104,7 @@ public class AccountService {
 			if(entity != null){
 				AccountLoadDto accountLoadDto = accountParser.parseAccountModelToAccountLoad(entity);
 				Response<AccountLoadDto> responseObj = new Response<AccountLoadDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), accountLoadDto);
-				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
 				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
