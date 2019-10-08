@@ -104,7 +104,7 @@ public class AccountModel implements Serializable {
 		this.payment = payment;
 	}
 
-	public String getCodcountry() {
+	public String getCountry() {
 		return country;
 	}
 
