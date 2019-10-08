@@ -37,7 +37,7 @@ public class AccountLoadDto implements Serializable {
     public AccountLoadDto() {
 	}
 
-	public AccountLoadDto(String username, String email, String name, String lastName, String codcountry, 
+	public AccountLoadDto(String username, String email, String name, String lastName, String country, 
 			Date dateCreation,Date dateUpdate) {
 		super();
 		this.username = username;
