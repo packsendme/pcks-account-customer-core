@@ -199,11 +199,11 @@ public class AccountService {
 		Response<AccountModel> responseObj = null;
 		AccountModel entity = null;
 		try {
-			if (type == "email"){
+			if (type.equals("email")){
 				accountEntity.setEmail(field);
 				entity = accountDAO.find(accountEntity);
 			}
-			else if (type == "username"){
+			else if (type.equals("username")){
 				accountEntity.setUsername(field);
 				entity = accountDAO.find(accountEntity);
 			} 
