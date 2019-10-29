@@ -45,10 +45,11 @@ public class AccountController {
 		return accountService.findAccountToLoad(username);
 	}
 
-	@GetMapping("/account/{email}")
-	public ResponseEntity<?> validateEmailAccount(
-			@Validated @PathVariable ("email") String email) {
-		return accountService.findAccountByEmail(email);
+	@GetMapping("/account/{field}/{type}")
+	public ResponseEntity<?> loadAccountByField(
+			@Validated @PathVariable ("field") String field,
+			@Validated @PathVariable ("type") String type) {
+		return accountService.findAccountByField(field, type);
 	}
 	
 	@GetMapping("/account/personalname/{username}")
@@ -109,10 +110,7 @@ public class AccountController {
 		return paymentAccountService.savePaymentAccountByUsername(username,paymentDto);
 	}
 
-	
-	
 	// ADDRESS ENTITY
-	
 	@PutMapping("/account/address")
 	public ResponseEntity<?> changeAddressAccount(
 			@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
