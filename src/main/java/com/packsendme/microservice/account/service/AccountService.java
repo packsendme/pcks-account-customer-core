@@ -196,7 +196,7 @@ public class AccountService {
 	
 	public ResponseEntity<?> findAccountByField(String field, String type) {
 		AccountModel accountEntity = new AccountModel();
-		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
+		Response<AccountModel> responseObj = null;
 		AccountModel entity = null;
 		try {
 			if (type == "email"){
@@ -209,9 +209,11 @@ public class AccountService {
 			} 
 				
 			if(entity != null) {
+				responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
+				responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.NOT_FOUND_ACCOUNT.getAction(), null);
 				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 			}
 		}
