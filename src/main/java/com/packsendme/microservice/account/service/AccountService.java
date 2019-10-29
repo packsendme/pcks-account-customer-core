@@ -194,12 +194,20 @@ public class AccountService {
 	}
 	
 	
-	public ResponseEntity<?> findAccountByEmail(String email) {
+	public ResponseEntity<?> findAccountByField(String field, String type) {
 		AccountModel accountEntity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_EMAIL.getAction(), null);
+		AccountModel entity = null;
 		try {
-			accountEntity.setEmail(email);
-			AccountModel entity = accountDAO.find(accountEntity);
+			if (type == "email"){
+				accountEntity.setEmail(field);
+				entity = accountDAO.find(accountEntity);
+			}
+			else if (type == "username"){
+				accountEntity.setUsername(field);
+				entity = accountDAO.find(accountEntity);
+			} 
+				
 			if(entity != null) {
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
