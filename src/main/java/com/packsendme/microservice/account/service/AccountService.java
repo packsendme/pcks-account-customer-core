@@ -129,7 +129,7 @@ public class AccountService {
 				nameAccountdDto.setName(entity.getName());
 				nameAccountdDto.setLastName(entity.getLastName());
 				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
-				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
+				return new ResponseEntity<>(responseObj, HttpStatus.OK);
 			}
 			else {
 				Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), null);
