@@ -17,7 +17,7 @@ import com.packsendme.microservice.account.dao.AccountDAO;
 import com.packsendme.microservice.account.dto.AccountDto;
 import com.packsendme.microservice.account.dto.AccountLoadDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
-import com.packsendme.microservice.account.dto.PersonalNamesAccountDto;
+import com.packsendme.microservice.account.dto.NamesAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
 import com.packsendme.microservice.account.utility.AccountParser;
 
@@ -120,15 +120,15 @@ public class AccountService {
 
 	public ResponseEntity<?> findNamesAccountByUsername(String username) {
 		AccountModel entity = new AccountModel();
-		PersonalNamesAccountDto nameAccountdDto = new PersonalNamesAccountDto();
+		NamesAccountDto nameAccountdDto = new NamesAccountDto();
 		try {
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 			
 			if(entity != null){
-				nameAccountdDto.setName(entity.getName());
+				nameAccountdDto.setFirstName(entity.getName());
 				nameAccountdDto.setLastName(entity.getLastName());
-				Response<PersonalNamesAccountDto> responseObj = new Response<PersonalNamesAccountDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
+				//Response<NamesAccountDto> responseObj = new Response<NamesAccountDto>(0,HttpExceptionPackSend.FOUND_ACCOUNT.getAction(), nameAccountdDto);
 				return new ResponseEntity<>(nameAccountdDto, HttpStatus.OK);
 			}
 			else {

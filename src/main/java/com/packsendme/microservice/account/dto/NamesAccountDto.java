@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "AccoPersonalNamesAccountDtountDto")
-public class PersonalNamesAccountDto implements Serializable {
+@Document(collection = "NamesAccountDto")
+public class NamesAccountDto implements Serializable {
 	
 	/**
 	 * 
@@ -14,15 +14,14 @@ public class PersonalNamesAccountDto implements Serializable {
 	/**
 	 * 
 	 */
-	private String name;
+	private String firstName;
 	private String lastName;
 	
-	
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	public String getLastName() {
 		return lastName;
@@ -30,4 +29,6 @@ public class PersonalNamesAccountDto implements Serializable {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	
 }
