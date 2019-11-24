@@ -1,14 +1,8 @@
 package com.packsendme.microservice.account.dto;
 
 import java.io.Serializable;
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Document(collection = "AddressAccountDto")
 public class AddressAccountDto implements Serializable {
@@ -22,18 +16,13 @@ public class AddressAccountDto implements Serializable {
 	 */
 	@Id
     private String id;
-	private String username;
-	private String dateUpdate;
 	private String address;
+	private String city;
+	private String country;
 	private String type;
 	private String main;
+	private String dateUpdate;
 	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getId() {
 		return id;
@@ -65,4 +54,17 @@ public class AddressAccountDto implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
 }

@@ -170,11 +170,11 @@ public class AccountService {
 		}
 	}
 	
-	public ResponseEntity<?> updateAddressAccountByUsername(AddressAccountDto addressAccount) throws Exception {
+	public ResponseEntity<?> updateAddressAccountByUsername(String username, AddressAccountDto addressAccount) throws Exception {
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_ACCOUNT.getAction(), null);
 		try {
 			AccountModel accountObj = new AccountModel();
-			accountObj.setUsername(addressAccount.getUsername());
+			accountObj.setUsername(username);
 			AccountModel accountFind = accountDAO.find(accountObj);
 			
 			// Parser Account Entity - Account Address
