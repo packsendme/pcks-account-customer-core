@@ -111,7 +111,7 @@ public class AccountController {
 	}
 
 	// ADDRESS ENTITY
-	@PutMapping("/account/address")
+	@PutMapping("/account/address/{username}")
 	public ResponseEntity<?> changeAddressAccount(
 			@Validated @PathVariable ("username") String username,
 			@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
