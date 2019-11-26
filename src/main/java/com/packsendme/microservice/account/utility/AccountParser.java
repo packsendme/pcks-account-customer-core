@@ -34,9 +34,10 @@ public class AccountParser {
 					
 				if(addressEntity.getType().equals(addressDto.getType())) {
 					addressNewModel.setId(addressEntity.getId());
-					addressNewModel.setType(addressEntity.getId());
 					addressNewModel.setAddress(addressEntity.getAddress());
-					addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC); 
+					addressNewModel.setMain(accountConst.ADDRESS_ORDER_SEC);
+					addressNewModel.setCity(addressEntity.getCity());
+					addressNewModel.setCountry(addressEntity.getCountry());
 					addressNewModel.setType(addressEntity.getType());
 				}
 				else {
@@ -51,6 +52,9 @@ public class AccountParser {
 		addressNewModel.setAddress(addressDto.getAddress());
 		addressNewModel.setMain(accountConst.ADDRESS_ORDER_MAIN);
 		addressNewModel.setType(addressDto.getType());
+		addressNewModel.setCity(addressDto.getCity());
+		addressNewModel.setCountry(addressDto.getCountry());
+
 		addressNewEntityL.add(addressNewModel);
 		
 		Date dtUpdate = convertObj.convertStringToDate(addressDto.getDateUpdate());
@@ -82,6 +86,9 @@ public class AccountParser {
 				addressDto.setAddress(addressEntity.getAddress());
 				addressDto.setMain(addressEntity.getMain()); 
 				addressDto.setType(addressEntity.getType());
+				addressDto.setCity(addressEntity.getCity());
+				addressDto.setCountry(addressEntity.getCountry());
+
 				addressDtoL.add(addressDto);
 			}
 		}
