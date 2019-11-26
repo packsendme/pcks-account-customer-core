@@ -1,6 +1,7 @@
 package com.packsendme.microservice.account.repository;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,8 +21,23 @@ public class AddressModel implements Serializable {
 	private String address;
 	private String type;
 	private String main;
+	private String country;
+	private String city;
 	
 	
+	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
 	public String getAddress() {
 		return address;
 	}
