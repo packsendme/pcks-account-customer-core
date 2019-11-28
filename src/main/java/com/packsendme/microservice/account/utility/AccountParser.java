@@ -57,7 +57,7 @@ public class AccountParser {
 
 		addressNewEntityL.add(addressNewModel);
 		
-		Date dtUpdate = convertObj.convertStringToDate(addressDto.getDateUpdate());
+		Date dtUpdate = convertObj.convertStringToDate(addressDto.getDateOperation());
 		entity.setAddress(null);
 		entity.setDateUpdate(dtUpdate);
 		entity.setAddress(addressNewEntityL);
@@ -88,7 +88,6 @@ public class AccountParser {
 				addressDto.setType(addressEntity.getType());
 				addressDto.setCity(addressEntity.getCity());
 				addressDto.setCountry(addressEntity.getCountry());
-
 				addressDtoL.add(addressDto);
 			}
 		}

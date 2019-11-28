@@ -21,7 +21,7 @@ public class AddressAccountDto implements Serializable {
 	private String country;
 	private String type;
 	private String main;
-	private String dateUpdate;
+	private String dateOperation;
 	
 
 	public String getId() {
@@ -30,11 +30,11 @@ public class AddressAccountDto implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getDateUpdate() {
-		return dateUpdate;
+	public String getDateOperation() {
+		return dateOperation;
 	}
-	public void setDateUpdate(String dateUpdate) {
-		this.dateUpdate = dateUpdate;
+	public void setDateOperation(String dateOperation) {
+		this.dateOperation = dateOperation;
 	}
 	public String getAddress() {
 		return address;
