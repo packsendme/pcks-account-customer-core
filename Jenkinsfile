@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        NAME_CONTAINER = "psm-core-account"
-        NAME_IMAGE = "microservice-core-account:1"
+        NAME_CONTAINER = "account-microservice-psm"
+        NAME_IMAGE = "account-image-psm:1"
         ID_CONTAINER = null 
         PORT_CONTAINER = "9094:9094"
     }
@@ -25,7 +25,7 @@ pipeline {
         stage("Docker Delopy - Check Container") {
             steps {
                 script {
-                    ID_CONTAINER = sh(script: "docker ps -f name=${NAME_CONTAINER} --format {{.ID}}", returnStdout: true).trim()
+                    ID_CONTAINER = sh(script: "docker ps -a -f name=${NAME_CONTAINER} --format {{.ID}}", returnStdout: true).trim()
                     echo "Deploy PR #${ID_CONTAINER}"
                 }
             }
