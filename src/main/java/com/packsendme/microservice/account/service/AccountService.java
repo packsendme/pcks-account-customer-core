@@ -9,11 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.MongoClientException;
-import com.packsendme.lib.common.constants.HttpExceptionPackSend;
+import com.packsendme.lib.common.constants.generic.HttpExceptionPackSend;
 import com.packsendme.lib.common.response.Response;
 import com.packsendme.lib.utility.ConvertFormat;
 import com.packsendme.microservice.account.controller.IAMClient;
-import com.packsendme.microservice.account.dao.AccountDAO;
+import com.packsendme.microservice.account.dao.CustomerDAO;
 import com.packsendme.microservice.account.dto.AccountDto;
 import com.packsendme.microservice.account.dto.AccountLoadDto;
 import com.packsendme.microservice.account.dto.AddressAccountDto;
@@ -26,7 +26,7 @@ import com.packsendme.microservice.account.utility.AccountParser;
 public class AccountService {
 	
 	@Autowired
-	private AccountDAO accountDAO;
+	private CustomerDAO accountDAO;
 	
 	@Autowired
 	private IAMClient iamClient; 

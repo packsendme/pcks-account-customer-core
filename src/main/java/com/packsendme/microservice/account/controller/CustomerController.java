@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.packsendme.microservice.account.dto.AccountDto;
@@ -18,7 +19,8 @@ import com.packsendme.microservice.account.service.AccountService;
 import com.packsendme.microservice.account.service.PaymentAccountService;
 
 @RestController
-public class AccountController {
+@RequestMapping("/account")
+public class CustomerController {
 
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class AccountController {
 	
 	//** BEGIN OPERATION: ACCOUNT FIRST ACCESS *************************************************//
 
-	@PostMapping("/account")
+	@PostMapping("/customer")
 	public ResponseEntity<?> createAccount(
 			@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.registerAccount(account);
@@ -39,26 +41,26 @@ public class AccountController {
 	//** BEGIN OPERATION CRUD *************************************************//
 
 	// ACCOUNT ENTITY
-	@GetMapping("/account/{username}/load")
+	@GetMapping("/customer/{username}/load")
 	public ResponseEntity<?> loadAccount(
 			@Validated @PathVariable ("username") String username) throws Exception {
 		return accountService.findAccountToLoad(username);
 	}
 
-	@GetMapping("/account/{field}/{type}")
+	@GetMapping("/customer/{field}/{type}")
 	public ResponseEntity<?> loadAccountByField(
 			@Validated @PathVariable ("field") String field,
 			@Validated @PathVariable ("type") String type) {
 		return accountService.findAccountByField(field, type);
 	}
 	
-	@GetMapping("/account/personalname/{username}")
+	@GetMapping("/customer/personalname/{username}")
 	public ResponseEntity<?> loadFirstNameAccount(
 			@Validated @PathVariable ("username") String username) {
 		return accountService.findNamesAccountByUsername(username);
 	}
 	
-	@PutMapping("/account/{username}/{usernamenew}/{dtAction}")
+	@PutMapping("/customer/{username}/{usernamenew}/{dtAction}")
 	public ResponseEntity<?> changeUsernameForAccount(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("usernamenew") String usernamenew,
@@ -66,7 +68,7 @@ public class AccountController {
 		return accountService.updateAccountByUsername(username,usernamenew,dtAction);
 	}
 	
-	@PutMapping("/account")
+	@PutMapping("/customer")
 	public ResponseEntity<?> changeAccount(
 			@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.updateAccountPersonalData(account);
@@ -74,20 +76,20 @@ public class AccountController {
 	
 	// PAYMENT ENTITY
 	
-	@GetMapping("/account/payment/{username}")
+	@GetMapping("/payment/{username}")
 	public ResponseEntity<?> getPayment(
 			@Validated @PathVariable ("username") String username) throws Exception {
 		return paymentAccountService.loadPaymentAccountAll(username);
 	}
 	
-	@GetMapping("/account/payment/{username}/{codnum}")
+	@GetMapping("/payment/{username}/{codnum}")
 	public ResponseEntity<?> getPaymentByCodnum(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("codnum") String codnum) throws Exception {
 		return paymentAccountService.loadPaymentAccountByCod(username, codnum);
 	}
 
-	@PutMapping("/account/payment/{username}/{codnumOld}")
+	@PutMapping("/payment/{username}/{codnumOld}")
 	public ResponseEntity<?> changePayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("codnumOld") String codnumOld, 
@@ -95,7 +97,7 @@ public class AccountController {
 		return paymentAccountService.updatePaymentAccountByUsername(username,codnumOld,paymentDto);
 	}
 	
-	@DeleteMapping("/account/payment/{username}/{payCodenum}/{payType}")
+	@DeleteMapping("/payment/{username}/{payCodenum}/{payType}")
 	public ResponseEntity<?> removePayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("payCodenum") String payCodenum,
@@ -103,7 +105,7 @@ public class AccountController {
 		return paymentAccountService.deletePaymentAccountByUsername(username, payCodenum, payType);
 	}
 	
-	@PostMapping("/account/payment/{username}")
+	@PostMapping("/payment/{username}")
 	public ResponseEntity<?> addPayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
@@ -111,7 +113,7 @@ public class AccountController {
 	}
 
 	// ADDRESS ENTITY
-	@PutMapping("/account/address/{username}")
+	@PutMapping("/address/{username}")
 	public ResponseEntity<?> changeAddressAccount(
 			@Validated @PathVariable ("username") String username,
 			@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {

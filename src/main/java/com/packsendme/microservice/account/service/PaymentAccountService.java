@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.MongoClientException;
-import com.packsendme.lib.common.constants.HttpExceptionPackSend;
+import com.packsendme.lib.common.constants.generic.HttpExceptionPackSend;
 import com.packsendme.lib.common.response.Response;
-import com.packsendme.microservice.account.dao.AccountDAO;
+import com.packsendme.microservice.account.dao.CustomerDAO;
 import com.packsendme.microservice.account.dto.PaymentDto;
 import com.packsendme.microservice.account.dto.PaymentsAccountDto;
 import com.packsendme.microservice.account.repository.AccountModel;
@@ -23,7 +23,7 @@ import com.packsendme.microservice.account.utility.PaymentAccountParser;
 public class PaymentAccountService {
 
 	@Autowired
-	private AccountDAO accountDAO;
+	private CustomerDAO accountDAO;
 
 	@Autowired
 	private PaymentAccountParser paymentParser;

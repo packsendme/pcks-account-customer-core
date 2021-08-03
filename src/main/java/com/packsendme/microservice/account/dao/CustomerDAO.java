@@ -10,7 +10,7 @@ import com.packsendme.microservice.account.repository.AccountModel;
 import com.packsendme.microservice.account.repository.AccountRepository;
 
 @Component("accountDAO")
-public class AccountDAO implements IAccountMongo {
+public class CustomerDAO implements ICustomer {
 	
 	@Autowired
 	AccountRepository accountRepository;

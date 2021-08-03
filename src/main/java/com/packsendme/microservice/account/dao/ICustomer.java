@@ -5,7 +5,7 @@ import java.util.List;
 import com.packsendme.microservice.account.repository.AccountModel;
 
 
-public interface IAccountMongo {
+public interface ICustomer {
 
 	public AccountModel add(AccountModel entity);
 
