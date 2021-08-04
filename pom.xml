@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.packsendme.microservice.account</groupId>
+	<groupId>com.packsendme.account.microservice</groupId>
 	<artifactId>pcks-account-customer-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -97,7 +97,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.packsendme.lib.crosscut</groupId>
+			<groupId>com.packsendme.crosscut.lib</groupId>
 			<artifactId>pcks-cross-commonslib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
