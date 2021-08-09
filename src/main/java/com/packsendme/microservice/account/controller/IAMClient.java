@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient(name="packsendme-iam-server")
+@FeignClient(name="pcks-account-iam-core")
 public interface IAMClient {
 	
 	@PutMapping("/iam/identity/{username}/{password}/{dtAction}")
