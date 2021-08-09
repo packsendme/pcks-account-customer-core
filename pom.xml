@@ -97,8 +97,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.packsendme.crosscut.lib</groupId>
-			<artifactId>pcks-cross-commonslib</artifactId>
+			<groupId>com.packsendme.lib.crosscut</groupId>
+			<artifactId>pcks-cross-commons-lib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
