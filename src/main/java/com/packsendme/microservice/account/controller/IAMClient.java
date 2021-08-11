@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 @FeignClient(name="pcks-account-iam-core")
 public interface IAMClient {
 	
-	@PutMapping("/iam/identity/{username}/{password}/{dtAction}")
+	@PutMapping("/account/iam/identity/{username}/{password}/{dtAction}")
 	ResponseEntity<?> createUser(
 			@PathVariable("username") String username, 
 			@PathVariable("password") String password,
