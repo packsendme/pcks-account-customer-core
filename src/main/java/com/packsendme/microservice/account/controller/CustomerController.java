@@ -35,23 +35,23 @@ public class CustomerController {
 	}
 
 	@PutMapping("/")
-	public ResponseEntity<?> changeAccount(
+	public ResponseEntity<?> updateAccount(
 			@Validated @RequestBody AccountDto account) throws Exception {
 		return accountService.updateAccountPersonalData(account);
 	}
 
 	
 	@PutMapping("/{username}/{usernamenew}/{dtAction}")
-	public ResponseEntity<?> changeUsernameForAccount(
+	public ResponseEntity<?> updateUsernameAccount(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("usernamenew") String usernamenew,
 			@Validated @PathVariable ("dtAction") String dtAction) throws Exception {
-		return accountService.updateAccountByUsername(username,usernamenew,dtAction);
+		return accountService.updateUsername(username,usernamenew,dtAction);
 	}
 	
 	// ADDRESS ENTITY
 	@PutMapping("/address/{username}")
-	public ResponseEntity<?> changeAddressAccount(
+	public ResponseEntity<?> updateAddressAccount(
 			@Validated @PathVariable ("username") String username,
 			@Validated @RequestBody AddressAccountDto addressAccount) throws Exception {
 		return accountService.updateAddressAccountByUsername(username,addressAccount);

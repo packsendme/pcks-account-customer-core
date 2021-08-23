@@ -71,7 +71,7 @@ public class AccountService {
 		}
 	}
 	
-	public ResponseEntity<?> updateAccountByUsername(String username, String usernamenew, String dtAction) throws Exception {
+	public ResponseEntity<?> updateUsername(String username, String usernamenew, String dtAction) throws Exception {
 		AccountModel entity = new AccountModel();
 		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_USERNAME.getAction(), entity);
 		Date dtUpdate = convertObj.convertStringToDate(dtAction);
