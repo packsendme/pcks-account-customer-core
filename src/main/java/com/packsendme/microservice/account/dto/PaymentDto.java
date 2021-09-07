@@ -1,6 +1,7 @@
  package com.packsendme.microservice.account.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,8 +23,8 @@ public class PaymentDto implements Serializable {
 	private String payExpiry;
 	private String payStatus;
 	private String payValue;
-	private String dateOperation;
-	
+	private Date dateCreation;
+	private Date dateUpdate;	
 	
 	public String getPayName() {
 		return payName;
@@ -74,19 +75,17 @@ public class PaymentDto implements Serializable {
 	public void setPayCountry(String payCountry) {
 		this.payCountry = payCountry;
 	}
-	public String getDateOperation() {
-		return dateOperation;
+	public Date getDateCreation() {
+		return dateCreation;
 	}
-	public void setDateOperation(String dateOperation) {
-		this.dateOperation = dateOperation;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
-
-	
-	
-    
-
-
-
-
+	public Date getDateUpdate() {
+		return dateUpdate;
+	}
+	public void setDateUpdate(Date dateUpdate) {
+		this.dateUpdate = dateUpdate;
+	}
 	
 }

@@ -1,7 +1,6 @@
 package com.packsendme.microservice.account.utility;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +76,7 @@ public class PaymentAccountParser {
 	}
 	
 	public AccountModel parsePaymentAccountOpEdit(AccountModel entity, PaymentDto paymentDto, String codnumOld) throws Exception {
-		Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateOperation());
+		//Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateOperation());
 		List<CardPayModel> cardL = new ArrayList<CardPayModel>();
 		List<VoucherPayModel> voucherL = new ArrayList<VoucherPayModel>();
 		List<PromotionPayModel> promotionL = new ArrayList<PromotionPayModel>();
@@ -119,7 +118,7 @@ public class PaymentAccountParser {
 							cardPayObj.setCardEntity(paymentDto.getPayEntity());
 							cardPayObj.setCardStatus(paymentDto.getPayStatus());
 							cardPayObj.setDateCreation(cardEntity.getDateCreation());
-							cardPayObj.setDateUpdate(dtUpdate);
+							cardPayObj.setDateUpdate(cardEntity.getDateUpdate());
 							cardL.add(cardPayObj);
 							System.out.println(" VERSION 0002 cardL "+ cardL.size());
 						}
@@ -144,7 +143,7 @@ public class PaymentAccountParser {
 							voucherPayObj.setVoucherEntity(paymentDto.getPayEntity());
 							voucherPayObj.setVoucherStatus(paymentDto.getPayStatus());
 							voucherPayObj.setDateCreation(voucherEntity.getDateCreation());
-							voucherPayObj.setDateUpdate(dtUpdate);
+							voucherPayObj.setDateUpdate(voucherEntity.getDateUpdate());
 							voucherL.add(voucherPayObj);
 							System.out.println(" VERSION 0003 voucherPayObj "+ voucherL.size());
 						}
@@ -169,7 +168,7 @@ public class PaymentAccountParser {
 							promotionPayObj.setPromotionEntity(paymentDto.getPayEntity());
 							promotionPayObj.setPromotionStatus(paymentDto.getPayStatus());
 							promotionPayObj.setDateCreation(promotionEntity.getDateCreation());
-							promotionPayObj.setDateUpdate(dtUpdate);
+							promotionPayObj.setDateUpdate(promotionEntity.getDateUpdate());
 							promotionL.add(promotionPayObj);
 							System.out.println(" VERSION 0004 cardL "+ promotionL.size());
 						}
@@ -290,7 +289,7 @@ public class PaymentAccountParser {
 		List<PromotionPayModel> promotionL = new ArrayList<PromotionPayModel>();
 
 		
-		Date dtOperation = convertObj.convertStringToDate(paymentAccountDto.getDateOperation());
+		//Date dtOperation = convertObj.convertStringToDate(paymentAccountDto.getDateOperation());
 
 		if(entity.getPayment() != null) {
 			for (PaymentModel paymentEntity : entity.getPayment()) {
@@ -314,7 +313,7 @@ public class PaymentAccountParser {
 			cardPayObj.setCardCVV(paymentAccountDto.getPayValue());
 			cardPayObj.setCardEntity(paymentAccountDto.getPayEntity());
 			cardPayObj.setCardStatus(paymentAccountDto.getPayStatus());
-			cardPayObj.setDateCreation(dtOperation);
+			cardPayObj.setDateCreation(paymentAccountDto.getDateCreation());
 			cardL.add(cardPayObj);
 			
 		}
@@ -328,7 +327,7 @@ public class PaymentAccountParser {
 			voucherPayObj.setVoucherValue(paymentAccountDto.getPayValue());
 			voucherPayObj.setVoucherEntity(paymentAccountDto.getPayEntity());
 			voucherPayObj.setVoucherStatus(PaymentConstants.STATUS_PAY_ACTIVE);
-			voucherPayObj.setDateCreation(dtOperation);
+			voucherPayObj.setDateCreation(paymentAccountDto.getDateCreation());
 			voucherL.add(voucherPayObj);
 		}
 		else if(paymentAccountDto.getPayType().equals(PaymentConstants.PROMOTION_PAY)) {
@@ -341,7 +340,7 @@ public class PaymentAccountParser {
 			promotionPayObj.setPromotionValue(paymentAccountDto.getPayValue());
 			promotionPayObj.setPromotionEntity(paymentAccountDto.getPayEntity());
 			promotionPayObj.setPromotionStatus(PaymentConstants.STATUS_PAY_ACTIVE);
-			promotionPayObj.setDateCreation(dtOperation);
+			promotionPayObj.setDateCreation(paymentAccountDto.getDateCreation());
 			promotionL.add(promotionPayObj);
 		}
 		
