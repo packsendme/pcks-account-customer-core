@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Account")
+@Document(collection = "PayCard")
 public class CardPayModel implements Serializable {
 	
 	/**
@@ -18,6 +18,7 @@ public class CardPayModel implements Serializable {
 	 */
 	@Id
     private String id;
+    private String cardPersonalName;
     private String cardEntity;
 	private String cardNumber;
 	private String cardExpiry;
@@ -34,6 +35,14 @@ public class CardPayModel implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public String getCardPersonalName() {
+		return cardPersonalName;
+	}
+	public void setCardPersonalName(String cardPersonalName) {
+		this.cardPersonalName = cardPersonalName;
+	}
+	
 	public String getCardNumber() {
 		return cardNumber;
 	}

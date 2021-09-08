@@ -15,7 +15,7 @@ public class PaymentDto implements Serializable {
 	/**
 	 * 
 	 */
-    private String payName;
+    private String payPersonalName;
     private String payCodenum;
 	private String payEntity;
 	private String payType;
@@ -26,11 +26,11 @@ public class PaymentDto implements Serializable {
 	private Date dateCreation;
 	private Date dateUpdate;	
 	
-	public String getPayName() {
-		return payName;
+	public String getPayPersonalName() {
+		return payPersonalName;
 	}
-	public void setPayName(String payName) {
-		this.payName = payName;
+	public void setPayPersonalName(String payPersonalName) {
+		this.payPersonalName = payPersonalName;
 	}
 	 
 	public String getPayExpiry() {
