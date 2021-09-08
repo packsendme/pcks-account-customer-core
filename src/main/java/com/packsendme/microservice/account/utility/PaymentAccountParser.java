@@ -312,6 +312,7 @@ public class PaymentAccountParser {
 		
 		if(paymentAccountDto.getPayType().equals(PaymentConstants.CARD_PAY)) {
 			cardPayObj = new CardPayModel();
+			cardPayObj.setCardPersonalName(paymentAccountDto.getPayPersonalName());
 			cardPayObj.setCardCountry(paymentAccountDto.getPayCountry());
 			cardPayObj.setCardNumber(paymentAccountDto.getPayCodenum());
 			cardPayObj.setCardExpiry(paymentAccountDto.getPayExpiry());
