@@ -1,6 +1,7 @@
 package com.packsendme.microservice.account.utility;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,7 +124,7 @@ public class PaymentAccountParser {
 							cardPayObj.setCardEntity(paymentDto.getPayEntity());
 							cardPayObj.setCardStatus(paymentDto.getPayStatus());
 							cardPayObj.setDateCreation(cardEntity.getDateCreation());
-							cardPayObj.setDateUpdate(cardEntity.getDateUpdate());
+							cardPayObj.setDateUpdate(paymentDto.getDateUpdate());
 							cardL.add(cardPayObj);
 							System.out.println(" VERSION 0002 cardL "+ cardL.size());
 						}
@@ -148,7 +149,7 @@ public class PaymentAccountParser {
 							voucherPayObj.setVoucherEntity(paymentDto.getPayEntity());
 							voucherPayObj.setVoucherStatus(paymentDto.getPayStatus());
 							voucherPayObj.setDateCreation(voucherEntity.getDateCreation());
-							voucherPayObj.setDateUpdate(voucherEntity.getDateUpdate());
+							voucherPayObj.setDateUpdate(paymentDto.getDateUpdate());
 							voucherL.add(voucherPayObj);
 							System.out.println(" VERSION 0003 voucherPayObj "+ voucherL.size());
 						}
@@ -173,7 +174,7 @@ public class PaymentAccountParser {
 							promotionPayObj.setPromotionEntity(paymentDto.getPayEntity());
 							promotionPayObj.setPromotionStatus(paymentDto.getPayStatus());
 							promotionPayObj.setDateCreation(promotionEntity.getDateCreation());
-							promotionPayObj.setDateUpdate(promotionEntity.getDateUpdate());
+							promotionPayObj.setDateUpdate(paymentDto.getDateUpdate());
 							promotionL.add(promotionPayObj);
 							System.out.println(" VERSION 0004 cardL "+ promotionL.size());
 						}
@@ -369,6 +370,97 @@ public class PaymentAccountParser {
 		entity.setPayment(paymentL);
 		return entity;
 	}
+	
+	public AccountModel parsePaymentAccountOpBlockOrUnblock(AccountModel entity, String codnum, String status, String typePay) throws Exception {
+		//Date dtUpdate = convertObj.convertStringToDate(paymentDto.getDateOperation());
+		List<CardPayModel> cardL = new ArrayList<CardPayModel>();
+		List<VoucherPayModel> voucherL = new ArrayList<VoucherPayModel>();
+		List<PromotionPayModel> promotionL = new ArrayList<PromotionPayModel>();
+		PaymentModel paymentModel = new PaymentModel();
+		List<PaymentModel> paymentL = new ArrayList<PaymentModel>();
+
+		for (PaymentModel paymentEntity : entity.getPayment()) {
+			if(!typePay.equals(PaymentConstants.VOUCHER_PAY)) {
+				if(paymentEntity.getVoucherPay() != null  && voucherL.size() == 0)  {
+					voucherL.addAll(paymentEntity.getVoucherPay());
+				}
+			}
+			if(!typePay.equals(PaymentConstants.PROMOTION_PAY)) {
+				if(paymentEntity.getPromotionPay() != null  && promotionL.size() == 0)  {
+					promotionL.addAll(paymentEntity.getPromotionPay());
+				}
+			}
+			if(!typePay.equals(PaymentConstants.CARD_PAY)) {
+				if(paymentEntity.getCardPay() != null  && cardL.size() == 0)  {
+					cardL.addAll(paymentEntity.getCardPay());
+				}
+			}
+		}
+
+		if(typePay.equals(PaymentConstants.CARD_PAY)) {
+			for (PaymentModel paymentEntity : entity.getPayment()) {
+				if(paymentEntity.getCardPay() != null)  {
+					for (CardPayModel cardEntity : paymentEntity.getCardPay()) {
+						if(cardEntity.getCardNumber().equals(codnum)) {
+							cardEntity.setCardStatus(status);
+							cardEntity.setDateUpdate(new Date());
+							cardL.add(cardEntity);
+						}
+						else {
+							cardL.add(cardEntity);
+						}
+					}
+				}
+			}
+		}
+		else if(typePay.equals(PaymentConstants.VOUCHER_PAY)) {
+			for (PaymentModel paymentEntity : entity.getPayment()) {
+				if(paymentEntity.getVoucherPay() != null)  {
+					for (VoucherPayModel voucherEntity : paymentEntity.getVoucherPay()) {
+						if(voucherEntity.getVoucherNumber().equals(codnum)) {
+							voucherEntity.setVoucherStatus(status);
+							voucherEntity.setDateUpdate(new Date());
+							voucherL.add(voucherEntity);
+						}
+						else {
+							voucherL.add(voucherEntity);
+						}
+					}
+				}
+			}
+		}
+		else if(typePay.equals(PaymentConstants.PROMOTION_PAY)) {
+			for (PaymentModel paymentEntity : entity.getPayment()) {
+				if(paymentEntity.getPromotionPay() != null)  {
+					for (PromotionPayModel promotionEntity : paymentEntity.getPromotionPay()) {
+						if(promotionEntity.getPromotionNumber().equals(codnum)) {
+							promotionEntity.setPromotionStatus(status);
+							promotionEntity.setDateUpdate(new Date());
+							promotionL.add(promotionEntity);
+						}
+						else {
+							promotionL.add(promotionEntity);
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if(voucherL.size() >= 1) {
+			paymentModel.setVoucherPayL(voucherL);
+		}
+		if(promotionL.size() >= 1) {
+			paymentModel.setPromotionPayL(promotionL);
+		}
+		if(cardL.size() >= 1) {
+			paymentModel.setCardPayL(cardL);
+		}
+		paymentL.add(paymentModel);
+		entity.setPayment(paymentL);
+		return entity;
+	}
+
 	
 
 }

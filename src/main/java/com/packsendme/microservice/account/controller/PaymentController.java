@@ -37,12 +37,21 @@ public class PaymentController {
 		return paymentAccountService.loadPaymentAccountByCod(username, codnum);
 	}
 
-	@PutMapping("/{username}/{codnumOld}")
+	@PutMapping("/{username}/{codnumPay}")
 	public ResponseEntity<?> changePayment(
 			@Validated @PathVariable ("username") String username,
-			@Validated @PathVariable ("codnumOld") String codnumOld, 
+			@Validated @PathVariable ("codnumPay") String codnumPay, 
 			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
-		return paymentAccountService.updatePaymentAccountByUsername(username,codnumOld,paymentDto);
+		return paymentAccountService.updatePaymentAccountByUsername(username,codnumPay,paymentDto);
+	}
+	
+	@PutMapping("/status/{username}/{codnumOld}")
+	public ResponseEntity<?> changeStatusPayment(
+			@Validated @PathVariable ("username") String username,
+			@Validated @PathVariable ("codnum") String codnum,
+			@Validated @PathVariable ("status") String status,
+			@Validated @PathVariable ("typePay") String typePay) throws Exception {
+		return paymentAccountService.blockOrUnblockPaymentAccount(username,codnum, status, typePay);
 	}
 	
 	@DeleteMapping("/{username}/{payCodenum}/{payType}")
@@ -59,5 +68,6 @@ public class PaymentController {
 			@Validated @RequestBody PaymentDto paymentDto) throws Exception {
 		return paymentAccountService.savePaymentAccountByUsername(username,paymentDto);
 	}
+	
 
 }

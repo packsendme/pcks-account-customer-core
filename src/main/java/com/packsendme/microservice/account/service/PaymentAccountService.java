@@ -58,6 +58,7 @@ public class PaymentAccountService {
 			entity.setUsername(username);
 			entity = accountDAO.find(entity);
 			boolean resultQuery = false;
+			PaymentsAccountDto paymentAccountDto = null;
 			
 			if(entity.getPayment() != null){
 				for (PaymentModel paymentEntity : entity.getPayment()) {
@@ -66,6 +67,7 @@ public class PaymentAccountService {
 							System.out.print(" loadPaymentAccountByCod  codnum "+cardEntity.getCardNumber());
 
 							if (cardEntity.getCardNumber().equals(codnum)) {
+								paymentAccountDto = paymentParser.parsePaymentAccountOpLoad(entity);
 								resultQuery = true;
 							}
 						}
@@ -73,10 +75,8 @@ public class PaymentAccountService {
 				}
 			}
 			
-			System.out.print(" loadPaymentAccountByCod  RESULT "+resultQuery);
-
 			if(resultQuery == true) {
-				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), null);
+				Response<PaymentsAccountDto> responseObj = new Response<PaymentsAccountDto>(0,HttpExceptionPackSend.FOUND_PAYMENT.getAction(), paymentAccountDto);
 				return new ResponseEntity<>(responseObj, HttpStatus.FOUND);
 			}
 			else {
@@ -156,6 +156,28 @@ public class PaymentAccountService {
 					return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
 				}
 		}catch (MongoClientException e ) {
+			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity<?> blockOrUnblockPaymentAccount(String username, String codnum, String status, String typePay) throws Exception {
+		AccountModel entity = new AccountModel();
+		Response<AccountModel> responseObj = new Response<AccountModel>(0,HttpExceptionPackSend.UPDATE_PAYMENT.getAction(), entity);
+		try {
+			entity.setUsername(username);
+			entity = accountDAO.find(entity);
+
+			if(entity != null) {
+				AccountModel entityObj = paymentParser.parsePaymentAccountOpBlockOrUnblock(entity, codnum, status, typePay);
+				entity = accountDAO.update(entityObj);
+				return new ResponseEntity<>(responseObj, HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(responseObj, HttpStatus.NOT_FOUND);
+			}
+		}
+		catch (MongoClientException e ) {
 			return new ResponseEntity<>(responseObj, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
