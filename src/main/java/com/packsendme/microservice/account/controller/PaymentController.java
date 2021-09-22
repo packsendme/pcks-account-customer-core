@@ -45,7 +45,7 @@ public class PaymentController {
 		return paymentAccountService.updatePaymentAccountByUsername(username,codnumPay,paymentDto);
 	}
 	
-	@PutMapping("/status/{username}/{codnumOld}")
+	@PutMapping("/status/{username}/{codnum}/{status}/{typePay}")
 	public ResponseEntity<?> changeStatusPayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("codnum") String codnum,
