@@ -46,7 +46,7 @@ public class PaymentController {
 	}
 	
 	@PutMapping("/status/{username}/{codnum}/{status}/{typePay}")
-	public ResponseEntity<?> changeStatusPayment(
+	public ResponseEntity<?> changeBockOrUnblockPayment(
 			@Validated @PathVariable ("username") String username,
 			@Validated @PathVariable ("codnum") String codnum,
 			@Validated @PathVariable ("status") String status,
